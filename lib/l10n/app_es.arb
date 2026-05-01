@@ -1,0 +1,520 @@
+{
+  "@@locale": "es",
+  "appTitle": "Club de Lectura",
+  "signInWithGoogle": "Iniciar sesión con Google",
+  "signInError": "Error al iniciar sesión. Por favor, inténtalo de nuevo.",
+
+  "emailPasswordSignIn": "Iniciar sesión con Email",
+  "email": "Email",
+  "emailHint": "Ingresa tu email",
+  "password": "Contraseña",
+  "passwordHint": "Ingresa tu contraseña",
+  "invalidEmail": "Por favor, ingresa un email válido.",
+  "passwordTooShort": "La contraseña debe tener al menos 6 caracteres.",
+  "signInButton": "Iniciar sesión",
+  "togglePasswordVisibility": "Mostrar/ocultar contraseña",
+  "noAccount": "¿No tienes cuenta?",
+  "createAccount": "Crear cuenta",
+
+  "pendingAccessTitle": "Acceso Pendiente",
+  "pendingAccessMessage": "Tu solicitud de membresía ha sido enviada. Un líder del club la revisará en breve.",
+
+  "waitingTitle": "Solicitud en Revisión",
+  "waitingMessage": "Tu solicitud de membresía está siendo revisada. Tendrás acceso una vez que un líder la apruebe.",
+
+  "rejectedTitle": "Acceso Denegado",
+  "rejectedMessage": "Tu solicitud de membresía no fue aprobada. Por favor, contacta a un líder del club para más información.",
+
+  "signOut": "Cerrar sesión",
+  "loading": "Cargando...",
+
+  "drawerWelcome": "¡Bienvenido!",
+  "drawerBooks": "Libros",
+  "drawerMembers": "Gestión de usuarios",
+  "drawerProfile": "Mi perfil",
+
+  "memberManagementTitle": "Gestión de Miembros",
+  "pendingRequests": "Solicitudes Pendientes",
+  "noPendingRequests": "No hay solicitudes de membresía pendientes.",
+  "approve": "Aprobar",
+  "reject": "Rechazar",
+  "memberApprovedSuccess": "Membresía aprobada.",
+  "memberRejectedSuccess": "Membresía rechazada.",
+  "memberActionError": "Ocurrió un error. Por favor, inténtalo de nuevo.",
+  "requestedAt": "Solicitado: {date}",
+
+  "addBook": "Agregar libro",
+  "editBook": "Editar libro",
+  "deleteBook": "Eliminar libro",
+  "addMeeting": "Agregar reunión",
+  "editMeeting": "Editar reunión",
+  "deleteMeeting": "Eliminar reunión",
+
+  "createBook": "Crear libro",
+  "bookTitle": "Título",
+  "bookTitleHint": "Ingresa el título del libro",
+  "bookAuthor": "Autor",
+  "bookAuthorHint": "Ingresa el nombre del autor",
+  "bookDescription": "Descripción",
+  "bookDescriptionHint": "Ingresa la descripción del libro",
+  "bookCover": "Imagen de portada",
+  "bookCoverHint": "Toca para seleccionar una imagen de portada",
+  "fieldRequired": "Este campo es obligatorio",
+  "save": "Guardar",
+  "cancel": "Cancelar",
+  "bookCreatedSuccess": "Libro creado exitosamente",
+  "bookUpdatedSuccess": "Libro actualizado exitosamente",
+  "bookSaveError": "Error al guardar el libro. Por favor, inténtalo de nuevo.",
+  "selectImage": "Seleccionar imagen",
+  "changeImage": "Cambiar imagen",
+
+  "bookListEmpty": "Aún no hay libros. Un líder puede agregar el primero.",
+  "bookListError": "Error al cargar los libros. Por favor, inténtalo de nuevo.",
+
+  "statusReading": "Leyendo actualmente",
+  "statusRead": "Leído",
+
+  "bookDetailError": "Error al cargar los detalles del libro.",
+  "bookNotFound": "Libro no encontrado.",
+
+  "meetings": "Reuniones",
+  "noMeetings": "Aún no hay reuniones.",
+
+  "comments": "Comentarios",
+  "noComments": "Aún no hay comentarios.",
+
+  "averageRating": "Calificación promedio",
+  "noRatings": "Aún no hay calificaciones.",
+
+  "finishedAt": "Terminado: {date}",
+
+  "markAsRead": "Marcar como leído",
+  "markAsReadConfirm": "¿Marcar este libro como leído?",
+  "confirm": "Confirmar",
+
+  "deleteBookConfirm": "¿Eliminar este libro? También se eliminarán todas las reuniones asociadas.",
+  "delete": "Eliminar",
+
+  "bookDeletedSuccess": "Libro eliminado exitosamente.",
+  "bookDeleteError": "Error al eliminar el libro. Por favor, inténtalo de nuevo.",
+
+  "bookMarkedAsRead": "Libro marcado como leído.",
+  "bookMarkAsReadError": "Error al actualizar el estado del libro. Por favor, inténtalo de nuevo.",
+
+  "createMeeting": "Crear reunión",
+  "meetingDate": "Fecha",
+  "meetingNotes": "Notas",
+  "meetingNotesHint": "Ingresa las notas de la reunión",
+  "meetingPartialRating": "Calificación parcial (1–5)",
+  "meetingPartialRatingHint": "Ingresa una calificación entre 1 y 5",
+  "meetingRatingInvalid": "La calificación debe ser un número entre 1 y 5",
+  "meetingCreatedSuccess": "Reunión creada exitosamente",
+  "meetingUpdatedSuccess": "Reunión actualizada exitosamente",
+  "meetingSaveError": "Error al guardar la reunión. Por favor, inténtalo de nuevo.",
+  "meetingDeletedSuccess": "Reunión eliminada exitosamente.",
+  "meetingDeleteError": "Error al eliminar la reunión. Por favor, inténtalo de nuevo.",
+  "deleteMeetingConfirm": "¿Eliminar esta reunión?",
+  "meetingScreenTitle": "Reuniones",
+  "partialRating": "Calificación: {rating}★",
+  "selectDate": "Seleccionar fecha",
+
+  "addComment": "Agregar comentario",
+  "commentHint": "Escribe un comentario...",
+  "commentLabel": "Comentario",
+  "commentTooShort": "El comentario debe tener al menos 1 carácter.",
+  "commentTooLong": "El comentario no debe superar los 1000 caracteres.",
+  "commentSendError": "Error al enviar el comentario. Por favor, inténtalo de nuevo.",
+  "send": "Enviar",
+  "commentCharCount": "{count}/1000",
+
+  "ratingOnlyForReadBooks": "La calificación solo está disponible cuando el libro ha sido marcado como leído",
+  "noRatingsYet": "Sin calificaciones",
+  "rateThisBook": "Califica este libro",
+  "rateThisMeeting": "Califica esta reunión",
+
+  "reviewQuestionsManagementTitle": "Preguntas de Reseña",
+  "addReviewQuestion": "Agregar pregunta",
+  "editReviewQuestion": "Editar pregunta",
+  "deleteReviewQuestion": "Eliminar pregunta",
+  "reviewQuestionLabel": "Pregunta",
+  "reviewQuestionHint": "Ingresa la pregunta de reseña",
+  "reviewQuestionOrderLabel": "Orden",
+  "reviewQuestionOrderHint": "Ingresa el orden de visualización (número)",
+  "reviewQuestionOrderInvalid": "El orden debe ser un número válido",
+  "reviewQuestionCreatedSuccess": "Pregunta creada exitosamente",
+  "reviewQuestionUpdatedSuccess": "Pregunta actualizada exitosamente",
+  "reviewQuestionDeletedSuccess": "Pregunta eliminada exitosamente",
+  "reviewQuestionSaveError": "Error al guardar la pregunta. Por favor, inténtalo de nuevo.",
+  "reviewQuestionDeleteError": "Error al eliminar la pregunta. Por favor, inténtalo de nuevo.",
+  "deleteReviewQuestionConfirm": "¿Eliminar esta pregunta de reseña?",
+  "noReviewQuestions": "Aún no hay preguntas de reseña.",
+  "reviewQuestionsForBook": "Preguntas de Reseña",
+  "finalReviewTitle": "Reseña Final",
+  "favoritePhrases": "Frases Favoritas",
+  "favoritePhraseRequired": "Agrega al menos una frase favorita del libro.",
+  "favoritePhraseRequiredError": "Agrega al menos una frase favorita antes de enviar.",
+  "favoritePhrasesHint": "Ingresa una frase favorita y presiona Agregar",
+  "addPhrase": "Agregar",
+  "submitReview": "Enviar Reseña",
+  "reviewSubmittedSuccess": "Reseña enviada exitosamente",
+  "noReviewQuestionsConfigured": "Este libro aún no tiene preguntas de reseña configuradas. Un líder debe agregar preguntas antes de poder enviar reseñas.",
+  "reviewSubmitError": "Error al enviar la reseña. Por favor, inténtalo de nuevo.",
+  "allReviewsTitle": "Reseñas de Miembros",
+  "noReviewsYet": "Aún no hay reseñas.",
+  "reviewByAuthor": "Reseña de {authorId}",
+  "answerLabel": "Respuesta: {answer}",
+  "reviewQuestionsManagementRoute": "Gestión de Preguntas de Reseña",
+
+  "networkError": "Error de red. Por favor, verifica tu conexión e inténtalo de nuevo.",
+  "permissionDenied": "No tienes permisos para realizar esta acción.",
+
+  "forgotPassword": "¿Olvidé mi contraseña?",
+  "passwordRecoveryTitle": "Restablecer contraseña",
+  "passwordRecoveryDescription": "Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
+  "sendResetLink": "Enviar enlace de restablecimiento",
+  "passwordResetSent": "Correo de restablecimiento de contraseña enviado exitosamente. Por favor, revisa tu correo.",
+  "passwordResetError": "Error al enviar el correo de restablecimiento. Por favor, inténtalo de nuevo.",
+  "backToSignIn": "Volver a iniciar sesión",
+
+  "registerTitle": "Crear cuenta",
+  "nameLabel": "Nombre",
+  "nameHint": "Ingresa tu nombre",
+  "emailLabel": "Correo electrónico",
+  "passwordLabel": "Contraseña",
+  "confirmPasswordLabel": "Confirmar contraseña",
+  "confirmPasswordHint": "Vuelve a ingresar tu contraseña",
+  "registerButton": "Registrarse",
+  "alreadyHaveAccount": "¿Ya tienes cuenta? Inicia sesión",
+  "nameRequired": "El nombre es requerido",
+  "weakPassword": "La contraseña debe tener al menos 8 caracteres con mayúscula, minúscula y número",
+  "passwordsDoNotMatch": "Las contraseñas no coinciden",
+  "registrationSuccess": "Cuenta creada exitosamente",
+  "emailAlreadyInUse": "Este correo ya está registrado",
+
+  "homeScreenTitle": "Inicio",
+
+  "profileTitle": "Mi Perfil",
+  "editProfile": "Editar Perfil",
+  "registrationDate": "Miembro desde: {date}",
+  "noPhotoAvailable": "Sin foto disponible",
+  "signOutConfirmTitle": "Cerrar sesión",
+  "signOutConfirmMessage": "¿Estás seguro de que deseas cerrar sesión?",
+
+  "editProfileTitle": "Editar Perfil",
+  "displayNameLabel": "Nombre",
+  "displayNameHint": "Ingresa tu nombre",
+  "displayNameRequired": "El nombre no puede estar vacío",
+  "profilePhotoLabel": "Foto de Perfil",
+  "changePhoto": "Cambiar foto",
+  "selectPhoto": "Seleccionar foto",
+  "profileUpdatedSuccess": "Perfil actualizado exitosamente",
+  "profileUpdateError": "Error al actualizar el perfil. Por favor, inténtalo de nuevo.",
+
+  "libraryTitle": "Mi Biblioteca",
+  "libraryTabWantToRead": "Quiero leer",
+  "libraryTabReading": "Leyendo",
+  "libraryTabRead": "Leídos",
+  "libraryEmptyWantToRead": "Aún no tienes libros en tu lista de quiero leer.",
+  "libraryEmptyReading": "No estás leyendo ningún libro actualmente.",
+  "libraryEmptyRead": "Aún no has marcado ningún libro como leído.",
+  "libraryErrorLoading": "Error al cargar tu biblioteca. Por favor, inténtalo de nuevo.",
+
+  "libraryChangeCategory": "Cambiar categoría",
+  "libraryRemoveFromLibrary": "Eliminar de mi biblioteca",
+  "libraryCategoryWantToRead": "Quiero leer",
+  "libraryCategoryReading": "Leyendo",
+  "libraryCategoryRead": "Leído",
+  "libraryCategoryChangedSuccess": "Categoría actualizada",
+  "libraryRemovedSuccess": "Libro eliminado de tu biblioteca",
+  "libraryCategoryChangeError": "Error al actualizar la categoría. Por favor, inténtalo de nuevo.",
+  "libraryRemoveError": "Error al eliminar el libro. Por favor, inténtalo de nuevo.",
+
+  "ratingCommentLabel": "Comentario (opcional)",
+  "ratingCommentHint": "Comparte tus impresiones sobre esta reunión...",
+  "saveRatingComment": "Guardar",
+
+  "yourRating": "Tu calificación:",
+  "yourRatingValue": "{value}/5",
+  "yourRatingComment": "Tu comentario:",
+  "editRating": "Editar calificación",
+
+  "ratingsScreenTitle": "Calificaciones de Miembros",
+  "noRatingsForMeeting": "Aún no hay calificaciones para esta reunión.",
+  "sortByScore": "Ordenar por puntuación",
+  "sortByName": "Ordenar por nombre",
+  "ratingValue": "{value}/5",
+  "viewAllRatings": "Ver todas las calificaciones",
+
+  "personalBooksTitle": "Mis Libros Personales",
+  "@personalBooksTitle": { "description": "Title for the personal books screen" },
+
+  "personalBookStatusWantToRead": "Quiero leer",
+  "@personalBookStatusWantToRead": { "description": "Status label for want to read" },
+
+  "personalBookStatusReading": "Leyendo",
+  "@personalBookStatusReading": { "description": "Status label for currently reading" },
+
+  "personalBookStatusRead": "Leído",
+  "@personalBookStatusRead": { "description": "Status label for read books" },
+
+  "personalBookEmptyTitle": "Aún no tienes libros personales",
+  "@personalBookEmptyTitle": { "description": "Empty state title for personal books list" },
+
+  "personalBookEmptyMessage": "Agrega tu primer libro para comenzar a registrar tus lecturas personales.",
+  "@personalBookEmptyMessage": { "description": "Empty state message for personal books list" },
+
+  "addPersonalBook": "Agregar libro",
+  "@addPersonalBook": { "description": "Button label to add a personal book" },
+
+  "personalBookTitleLabel": "Título",
+  "@personalBookTitleLabel": { "description": "Label for title field in personal book form" },
+
+  "personalBookTitleHint": "Ingresa el título del libro",
+  "@personalBookTitleHint": { "description": "Hint for title field in personal book form" },
+
+  "personalBookAuthorLabel": "Autor",
+  "@personalBookAuthorLabel": { "description": "Label for author field in personal book form" },
+
+  "personalBookAuthorHint": "Ingresa el nombre del autor",
+  "@personalBookAuthorHint": { "description": "Hint for author field in personal book form" },
+
+  "personalBookDescriptionLabel": "Descripción",
+  "@personalBookDescriptionLabel": { "description": "Label for description field in personal book form" },
+
+  "personalBookDescriptionHint": "Ingresa la descripción del libro (opcional)",
+  "@personalBookDescriptionHint": { "description": "Hint for description field in personal book form" },
+
+  "personalBookCoverLabel": "Imagen de portada",
+  "@personalBookCoverLabel": { "description": "Label for cover image in personal book form" },
+
+  "personalBookCoverHint": "Toca para seleccionar una imagen de portada",
+  "@personalBookCoverHint": { "description": "Hint for cover image picker in personal book form" },
+
+  "personalBookStatusLabel": "Estado",
+  "@personalBookStatusLabel": { "description": "Label for status dropdown in personal book form" },
+
+  "personalBookNotesLabel": "Comentarios",
+  "@personalBookNotesLabel": { "description": "Label for comments field in personal book detail" },
+
+  "personalBookNotesHint": "Escribe tus comentarios personales sobre este libro...",
+  "@personalBookNotesHint": { "description": "Hint for comments field in personal book detail" },
+
+  "personalBookRatingLabel": "Tu calificación",
+  "@personalBookRatingLabel": { "description": "Label for rating widget in personal book detail" },
+
+  "personalBookRatingValue": "{value}/5",
+  "@personalBookRatingValue": {
+    "description": "Shows the numeric value of the rating",
+    "placeholders": { "value": { "type": "int" } }
+  },
+
+  "personalBookRatingOnlyForRead": "Solo puedes calificar libros que hayan sido marcados como leídos",
+  "@personalBookRatingOnlyForRead": { "description": "Message shown when trying to rate a book that is not read" },
+
+  "personalBookNoteTooLong": "El comentario no debe superar los {max} caracteres (actual: {current})",
+  "@personalBookNoteTooLong": {
+    "description": "Error message when comment exceeds maximum length",
+    "placeholders": { "max": { "type": "int" }, "current": { "type": "int" } }
+  },
+
+  "personalBookCreatedSuccess": "Libro agregado a tu biblioteca personal",
+  "@personalBookCreatedSuccess": { "description": "Snackbar shown after creating a personal book" },
+
+  "personalBookUpdatedSuccess": "Libro actualizado exitosamente",
+  "@personalBookUpdatedSuccess": { "description": "Snackbar shown after updating a personal book" },
+
+  "personalBookDeletedSuccess": "Libro eliminado de tu biblioteca personal",
+  "@personalBookDeletedSuccess": { "description": "Snackbar shown after deleting a personal book" },
+
+  "personalBookSaveError": "Error al guardar el libro. Por favor, inténtalo de nuevo.",
+  "@personalBookSaveError": { "description": "Snackbar shown when saving a personal book fails" },
+
+  "personalBookDeleteError": "Error al eliminar el libro. Por favor, inténtalo de nuevo.",
+  "@personalBookDeleteError": { "description": "Snackbar shown when deleting a personal book fails" },
+
+  "personalBookDeleteConfirm": "¿Eliminar este libro de tu biblioteca personal?",
+  "@personalBookDeleteConfirm": { "description": "Confirmation dialog for deleting a personal book" },
+
+  "personalBookErrorLoading": "Error al cargar tus libros. Por favor, inténtalo de nuevo.",
+  "@personalBookErrorLoading": { "description": "Error message for personal books screen" },
+
+  "personalBookFilterAll": "Todos",
+  "@personalBookFilterAll": { "description": "Filter option to show all books" },
+
+  "personalBookStartedAt": "Started reading",
+  "@personalBookStartedAt": { "description": "Label for started reading date" },
+
+  "personalBookFinishedAt": "Finished reading",
+  "@personalBookFinishedAt": { "description": "Label for finished reading date" },
+
+  "retry": "Reintentar",
+  "@retry": { "description": "Retry button label" },
+
+  "personalBookReviewTitle": "Reseña del Libro",
+  "@personalBookReviewTitle": { "description": "Title for personal book review section" },
+
+  "personalBookReviewThoughtsLabel": "Tus Pensamientos",
+  "@personalBookReviewThoughtsLabel": { "description": "Label for thoughts field in personal book review" },
+
+  "personalBookReviewThoughtsHint": "Comparte tus pensamientos generales sobre este libro...",
+  "@personalBookReviewThoughtsHint": { "description": "Hint for thoughts field in personal book review" },
+
+  "personalBookReviewSubmittedSuccess": "Reseña enviada exitosamente",
+  "@personalBookReviewSubmittedSuccess": { "description": "Snackbar shown after submitting a personal book review" },
+
+  "personalBookReviewSubmitError": "Error al enviar la reseña. Por favor, inténtalo de nuevo.",
+  "@personalBookReviewSubmitError": { "description": "Snackbar shown when submitting a personal book review fails" },
+
+  "selectReviewQuestions": "Seleccionar Preguntas de Reseña",
+  "@selectReviewQuestions": { "description": "Título para la sección de selección de preguntas" },
+
+  "selectReviewQuestionsHint": "Elige qué preguntas quieres responder sobre este libro",
+  "@selectReviewQuestionsHint": { "description": "Texto de ayuda para la selección de preguntas" },
+
+  "questionsSelected": "preguntas seleccionadas",
+  "@questionsSelected": { "description": "Etiqueta que muestra el número de preguntas seleccionadas" },
+
+  "answerSelectedQuestions": "Responder Preguntas Seleccionadas",
+  "@answerSelectedQuestions": { "description": "Título para la sección de respuestas" },
+
+  "noQuestionsSelected": "No se han seleccionado preguntas. Por favor selecciona al menos una arriba.",
+  "@noQuestionsSelected": { "description": "Mensaje cuando no hay preguntas seleccionadas" },
+
+  "question": "Pregunta",
+  "@question": { "description": "Etiqueta para el campo de pregunta" },
+
+  "answerPlaceholder": "Tu respuesta...",
+  "@answerPlaceholder": { "description": "Sugerencia para el campo de respuesta" },
+
+  "selectedQuestions": "Preguntas Seleccionadas",
+  "@selectedQuestions": { "description": "Etiqueta para la sección de preguntas seleccionadas en el resumen" },
+
+  "questionAnswers": "Respuestas a Preguntas",
+  "@questionAnswers": { "description": "Etiqueta para la sección de respuestas en el resumen" },
+
+  "continueText": "Continuar",
+  "@continueText": { "description": "Etiqueta para el botón de continuar" },
+
+  "questionWithNumber": "Pregunta {number}:",
+  "@questionWithNumber": { "description": "Etiqueta para pregunta con número", "placeholders": { "number": { "type": "int" } } },
+
+  "userManagementTitle": "Gestión de Usuarios",
+  "@userManagementTitle": { "description": "Title for user management screen" },
+
+  "errorLoadingUsers": "Error al cargar los usuarios. Por favor, inténtalo de nuevo.",
+  "@errorLoadingUsers": { "description": "Error message when loading users fails" },
+
+  "noUsersFound": "No se encontraron usuarios.",
+  "@noUsersFound": { "description": "Message when no users are found" },
+
+  "noName": "Sin nombre",
+  "@noName": { "description": "Placeholder when user has no display name" },
+
+  "you": "Tú",
+  "@you": { "description": "Label to indicate current user" },
+
+  "leader": "Líder",
+  "@leader": { "description": "Label for leader role" },
+
+  "member": "Miembro",
+  "@member": { "description": "Label for member role" },
+
+  "active": "Activo",
+  "@active": { "description": "Label for active membership status" },
+
+  "pending": "Pendiente",
+  "@pending": { "description": "Label for pending membership status" },
+
+  "inactive": "Inactivo",
+  "@inactive": { "description": "Label for inactive/rejected membership status" },
+
+  "unknown": "Desconocido",
+  "@unknown": { "description": "Label for unknown status" },
+
+  "makeAMember": "Hacer miembro",
+  "@makeAMember": { "description": "Button label to change user role to member" },
+
+  "makeALeader": "Hacer líder",
+  "@makeALeader": { "description": "Button label to change user role to leader" },
+
+  "deactivate": "Desactivar",
+  "@deactivate": { "description": "Button label to deactivate a user" },
+
+  "reactivate": "Reactivar",
+  "@reactivate": { "description": "Button label to reactivate a user" },
+
+  "roleUpdatedSuccess": "Rol actualizado exitosamente",
+  "@roleUpdatedSuccess": { "description": "Snackbar shown after successfully updating user role" },
+
+  "roleUpdateError": "Error al actualizar el rol. Por favor, inténtalo de nuevo.",
+  "@roleUpdateError": { "description": "Snackbar shown when updating user role fails" },
+
+  "confirmDeactivation": "Confirmar desactivación",
+  "@confirmDeactivation": { "description": "Title for deactivation confirmation dialog" },
+
+  "deactivationWarning": "¿Estás seguro de que deseas desactivar este usuario? El usuario perderá acceso a la aplicación.",
+  "@deactivationWarning": { "description": "Warning message in deactivation confirmation dialog" },
+
+  "userDeactivatedSuccess": "Usuario desactivado exitosamente",
+  "@userDeactivatedSuccess": { "description": "Snackbar shown after successfully deactivating a user" },
+
+  "userReactivatedSuccess": "Usuario reactivado exitosamente",
+  "@userReactivatedSuccess": { "description": "Snackbar shown after successfully reactivating a user" },
+
+  "userActionError": "Error al realizar la acción. Por favor, inténtalo de nuevo.",
+  "@userActionError": { "description": "Snackbar shown when a user action fails" },
+
+  "allUsers": "Todos los usuarios",
+  "@allUsers": { "description": "Tab label for all users in member management screen" },
+
+  "themeDialogTitle": "Seleccionar Tema",
+  "@themeDialogTitle": { "description": "Title for theme selection dialog" },
+
+  "themeSystem": "Sistema",
+  "@themeSystem": { "description": "System theme option" },
+
+  "themeSystemDescription": "Usar el tema del sistema",
+  "@themeSystemDescription": { "description": "Description for system theme option" },
+
+  "themeLight": "Claro",
+  "@themeLight": { "description": "Light theme option" },
+
+  "themeLightDescription": "Tema claro",
+  "@themeLightDescription": { "description": "Description for light theme option" },
+
+  "themeDark": "Oscuro",
+  "@themeDark": { "description": "Dark theme option" },
+
+  "themeDarkDescription": "Tema oscuro",
+  "@themeDarkDescription": { "description": "Description for dark theme option" },
+
+  "languageDialogTitle": "Seleccionar Idioma",
+  "@languageDialogTitle": { "description": "Title for language selection dialog" },
+
+  "languageSystem": "Sistema",
+  "@languageSystem": { "description": "System language option" },
+
+  "languageSystemDescription": "Usar idioma del sistema",
+  "@languageSystemDescription": { "description": "Description for system language option" },
+
+  "languageEnglish": "Inglés",
+  "@languageEnglish": { "description": "English language option" },
+
+  "languageEnglishDescription": "English",
+  "@languageEnglishDescription": { "description": "Description for English language option" },
+
+  "languageSpanish": "Español",
+  "@languageSpanish": { "description": "Spanish language option" },
+
+  "languageSpanishDescription": "Español",
+  "@languageSpanishDescription": { "description": "Description for Spanish language option" },
+
+  "language": "Idioma",
+  "@language": { "description": "Label for language setting" },
+
+  "theme": "Tema",
+  "@theme": { "description": "Label for theme setting" },
+
+  "settings": "Configuración",
+  "@settings": { "description": "Label for settings section" }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Spec Review Question Selection",
+  "description": "Create a spec for implementing review question selection in personal books",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": ""
+  }
+}

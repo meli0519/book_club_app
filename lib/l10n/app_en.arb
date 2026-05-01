@@ -1,0 +1,929 @@
+{
+  "@@locale": "en",
+  "appTitle": "Book Club",
+  "@appTitle": { "description": "Application title" },
+
+  "signInWithGoogle": "Sign in with Google",
+  "@signInWithGoogle": { "description": "Google sign-in button label" },
+
+  "signInError": "Sign-in failed. Please try again.",
+  "@signInError": { "description": "Generic sign-in error message" },
+
+  "emailPasswordSignIn": "Sign in with Email",
+  "@emailPasswordSignIn": { "description": "Email/password sign-in button label" },
+
+  "email": "Email",
+  "@email": { "description": "Label for email field" },
+
+  "emailHint": "Enter your email",
+  "@emailHint": { "description": "Hint for email field" },
+
+  "password": "Password",
+  "@password": { "description": "Label for password field" },
+
+  "passwordHint": "Enter your password",
+  "@passwordHint": { "description": "Hint for password field" },
+
+  "invalidEmail": "Please enter a valid email address.",
+  "@invalidEmail": { "description": "Validation error for invalid email" },
+
+  "passwordTooShort": "Password must be at least 6 characters.",
+  "@passwordTooShort": { "description": "Validation error for short password" },
+
+  "signInButton": "Sign In",
+  "@signInButton": { "description": "Sign in button label" },
+
+  "togglePasswordVisibility": "Show/hide password",
+  "@togglePasswordVisibility": { "description": "Tooltip for password visibility toggle" },
+
+  "noAccount": "Don't have an account?",
+  "@noAccount": { "description": "Text prompting user to create account" },
+
+  "createAccount": "Create Account",
+  "@createAccount": { "description": "Link to create account screen" },
+
+  "pendingAccessTitle": "Access Pending",
+  "@pendingAccessTitle": { "description": "Title for pending access screen" },
+
+  "pendingAccessMessage": "Your membership request has been submitted. A club leader will review it shortly.",
+  "@pendingAccessMessage": { "description": "Message shown when membership request was just created" },
+
+  "waitingTitle": "Request Under Review",
+  "@waitingTitle": { "description": "Title for waiting screen" },
+
+  "waitingMessage": "Your membership request is being reviewed. You will gain access once a leader approves it.",
+  "@waitingMessage": { "description": "Message shown while membership is pending" },
+
+  "rejectedTitle": "Access Denied",
+  "@rejectedTitle": { "description": "Title shown when membership is rejected" },
+
+  "rejectedMessage": "Your membership request was not approved. Please contact a club leader for more information.",
+  "@rejectedMessage": { "description": "Message shown when membership is rejected" },
+
+  "signOut": "Sign Out",
+  "@signOut": { "description": "Sign out button label" },
+
+  "loading": "Loading...",
+  "@loading": { "description": "Generic loading label" },
+
+  "drawerWelcome": "Welcome!",
+  "@drawerWelcome": { "description": "Greeting shown at the top of the navigation drawer" },
+
+  "drawerBooks": "Books",
+  "@drawerBooks": { "description": "Drawer menu item for books list" },
+
+  "drawerMembers": "User Management",
+  "@drawerMembers": { "description": "Drawer menu item for member management (leaders only)" },
+
+  "drawerProfile": "My Profile",
+  "@drawerProfile": { "description": "Drawer menu item for user profile" },
+
+  "memberManagementTitle": "Member Management",
+  "@memberManagementTitle": { "description": "Title for member management screen" },
+
+  "pendingRequests": "Pending Requests",
+  "@pendingRequests": { "description": "Section header for pending membership requests" },
+
+  "noPendingRequests": "No pending membership requests.",
+  "@noPendingRequests": { "description": "Empty state for pending requests list" },
+
+  "approve": "Approve",
+  "@approve": { "description": "Approve membership button label" },
+
+  "reject": "Reject",
+  "@reject": { "description": "Reject membership button label" },
+
+  "memberApprovedSuccess": "Membership approved.",
+  "@memberApprovedSuccess": { "description": "Snackbar shown after approving a member" },
+
+  "memberRejectedSuccess": "Membership rejected.",
+  "@memberRejectedSuccess": { "description": "Snackbar shown after rejecting a member" },
+
+  "memberActionError": "An error occurred. Please try again.",
+  "@memberActionError": { "description": "Snackbar shown when approve/reject fails" },
+
+  "requestedAt": "Requested: {date}",
+  "@requestedAt": {
+    "description": "Label showing when membership was requested",
+    "placeholders": { "date": { "type": "String" } }
+  },
+
+  "addBook": "Add Book",
+  "@addBook": { "description": "Tooltip/label for add book button (leaders only)" },
+
+  "editBook": "Edit Book",
+  "@editBook": { "description": "Tooltip/label for edit book button (leaders only)" },
+
+  "deleteBook": "Delete Book",
+  "@deleteBook": { "description": "Tooltip/label for delete book button (leaders only)" },
+
+  "addMeeting": "Add Meeting",
+  "@addMeeting": { "description": "Tooltip/label for add meeting button (leaders only)" },
+
+  "editMeeting": "Edit Meeting",
+  "@editMeeting": { "description": "Tooltip/label for edit meeting button (leaders only)" },
+
+  "deleteMeeting": "Delete Meeting",
+  "@deleteMeeting": { "description": "Tooltip/label for delete meeting button (leaders only)" },
+
+  "createBook": "Create Book",
+  "@createBook": { "description": "Title for create book screen" },
+
+  "bookTitle": "Title",
+  "@bookTitle": { "description": "Label for book title field" },
+
+  "bookTitleHint": "Enter book title",
+  "@bookTitleHint": { "description": "Hint for book title field" },
+
+  "bookAuthor": "Author",
+  "@bookAuthor": { "description": "Label for book author field" },
+
+  "bookAuthorHint": "Enter author name",
+  "@bookAuthorHint": { "description": "Hint for book author field" },
+
+  "bookDescription": "Description",
+  "@bookDescription": { "description": "Label for book description field" },
+
+  "bookDescriptionHint": "Enter book description",
+  "@bookDescriptionHint": { "description": "Hint for book description field" },
+
+  "bookCover": "Cover Image",
+  "@bookCover": { "description": "Label for book cover image section" },
+
+  "bookCoverHint": "Tap to select a cover image",
+  "@bookCoverHint": { "description": "Hint for book cover image picker" },
+
+  "fieldRequired": "This field is required",
+  "@fieldRequired": { "description": "Validation message for required fields" },
+
+  "save": "Save",
+  "@save": { "description": "Save button label" },
+
+  "cancel": "Cancel",
+  "@cancel": { "description": "Cancel button label" },
+
+  "bookCreatedSuccess": "Book created successfully",
+  "@bookCreatedSuccess": { "description": "Snackbar shown after creating a book" },
+
+  "bookUpdatedSuccess": "Book updated successfully",
+  "@bookUpdatedSuccess": { "description": "Snackbar shown after updating a book" },
+
+  "bookSaveError": "Error saving book. Please try again.",
+  "@bookSaveError": { "description": "Snackbar shown when saving a book fails" },
+
+  "selectImage": "Select Image",
+  "@selectImage": { "description": "Button label to select a cover image" },
+
+  "changeImage": "Change Image",
+  "@changeImage": { "description": "Button label to change the cover image" },
+
+  "bookListEmpty": "No books yet. A leader can add the first one.",
+  "@bookListEmpty": { "description": "Empty state message for book list" },
+
+  "bookListError": "Error loading books. Please try again.",
+  "@bookListError": { "description": "Error message for book list" },
+
+  "statusReading": "Currently Reading",
+  "@statusReading": { "description": "Label for books with status reading" },
+
+  "statusRead": "Read",
+  "@statusRead": { "description": "Label for books with status read" },
+
+  "bookDetailError": "Error loading book details.",
+  "@bookDetailError": { "description": "Error message for book detail screen" },
+
+  "bookNotFound": "Book not found.",
+  "@bookNotFound": { "description": "Message when book is not found" },
+
+  "meetings": "Meetings",
+  "@meetings": { "description": "Section header for meetings" },
+
+  "noMeetings": "No meetings yet.",
+  "@noMeetings": { "description": "Empty state for meetings list" },
+
+  "comments": "Comments",
+  "@comments": { "description": "Section header for comments" },
+
+  "noComments": "No comments yet.",
+  "@noComments": { "description": "Empty state for comments list" },
+
+  "averageRating": "Average Rating",
+  "@averageRating": { "description": "Label for average rating" },
+
+  "noRatings": "No ratings yet.",
+  "@noRatings": { "description": "Empty state for ratings" },
+
+  "finishedAt": "Finished: {date}",
+  "@finishedAt": {
+    "description": "Label showing when book was finished",
+    "placeholders": { "date": { "type": "String" } }
+  },
+
+  "markAsRead": "Mark as Read",
+  "@markAsRead": { "description": "Button to mark a book as read" },
+
+  "markAsReadConfirm": "Mark this book as read?",
+  "@markAsReadConfirm": { "description": "Confirmation dialog title for marking book as read" },
+
+  "confirm": "Confirm",
+  "@confirm": { "description": "Confirm button label" },
+
+  "deleteBookConfirm": "Delete this book? This will also delete all associated meetings.",
+  "@deleteBookConfirm": { "description": "Confirmation dialog for deleting a book" },
+
+  "delete": "Delete",
+  "@delete": { "description": "Delete button label" },
+
+  "bookDeletedSuccess": "Book deleted successfully.",
+  "@bookDeletedSuccess": { "description": "Snackbar shown after deleting a book" },
+
+  "bookDeleteError": "Error deleting book. Please try again.",
+  "@bookDeleteError": { "description": "Snackbar shown when deleting a book fails" },
+
+  "bookMarkedAsRead": "Book marked as read.",
+  "@bookMarkedAsRead": { "description": "Snackbar shown after marking book as read" },
+
+  "bookMarkAsReadError": "Error updating book status. Please try again.",
+  "@bookMarkAsReadError": { "description": "Snackbar shown when marking as read fails" },
+
+  "createMeeting": "Create Meeting",
+  "@createMeeting": { "description": "Title for create meeting screen" },
+
+  "meetingDate": "Date",
+  "@meetingDate": { "description": "Label for meeting date field" },
+
+  "meetingNotes": "Notes",
+  "@meetingNotes": { "description": "Label for meeting notes field" },
+
+  "meetingNotesHint": "Enter meeting notes",
+  "@meetingNotesHint": { "description": "Hint for meeting notes field" },
+
+  "meetingPartialRating": "Partial Rating (1–5)",
+  "@meetingPartialRating": { "description": "Label for meeting partial rating field" },
+
+  "meetingPartialRatingHint": "Enter a rating between 1 and 5",
+  "@meetingPartialRatingHint": { "description": "Hint for meeting partial rating field" },
+
+  "meetingRatingInvalid": "Rating must be a number between 1 and 5",
+  "@meetingRatingInvalid": { "description": "Validation error for meeting partial rating" },
+
+  "meetingCreatedSuccess": "Meeting created successfully",
+  "@meetingCreatedSuccess": { "description": "Snackbar shown after creating a meeting" },
+
+  "meetingUpdatedSuccess": "Meeting updated successfully",
+  "@meetingUpdatedSuccess": { "description": "Snackbar shown after updating a meeting" },
+
+  "meetingSaveError": "Error saving meeting. Please try again.",
+  "@meetingSaveError": { "description": "Snackbar shown when saving a meeting fails" },
+
+  "meetingDeletedSuccess": "Meeting deleted successfully.",
+  "@meetingDeletedSuccess": { "description": "Snackbar shown after deleting a meeting" },
+
+  "meetingDeleteError": "Error deleting meeting. Please try again.",
+  "@meetingDeleteError": { "description": "Snackbar shown when deleting a meeting fails" },
+
+  "deleteMeetingConfirm": "Delete this meeting?",
+  "@deleteMeetingConfirm": { "description": "Confirmation dialog for deleting a meeting" },
+
+  "meetingScreenTitle": "Meetings",
+  "@meetingScreenTitle": { "description": "Title for meeting screen" },
+
+  "partialRating": "Rating: {rating}★",
+  "@partialRating": {
+    "description": "Label showing partial rating of a meeting",
+    "placeholders": { "rating": { "type": "int" } }
+  },
+
+  "selectDate": "Select Date",
+  "@selectDate": { "description": "Button label to select a date" },
+
+  "addComment": "Add Comment",
+  "@addComment": { "description": "Button label to add a comment" },
+
+  "commentHint": "Write a comment...",
+  "@commentHint": { "description": "Hint text for comment input field" },
+
+  "commentLabel": "Comment",
+  "@commentLabel": { "description": "Label for comment input field" },
+
+  "commentTooShort": "Comment must be at least 1 character.",
+  "@commentTooShort": { "description": "Validation error when comment is empty" },
+
+  "commentTooLong": "Comment must not exceed 1000 characters.",
+  "@commentTooLong": { "description": "Validation error when comment exceeds 1000 chars" },
+
+  "commentSendError": "Error sending comment. Please try again.",
+  "@commentSendError": { "description": "Snackbar shown when sending a comment fails" },
+
+  "send": "Send",
+  "@send": { "description": "Send button label" },
+
+  "commentCharCount": "{count}/1000",
+  "@commentCharCount": {
+    "description": "Character counter for comment field",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "ratingOnlyForReadBooks": "Rating is only available when the book has been marked as read",
+  "@ratingOnlyForReadBooks": { "description": "Message shown when trying to rate a book that is still being read" },
+
+  "noRatingsYet": "No ratings yet",
+  "@noRatingsYet": { "description": "Shown when there are no ratings for a book or meeting" },
+
+  "rateThisBook": "Rate this book",
+  "@rateThisBook": { "description": "Label above the star rating selector for a book" },
+
+  "rateThisMeeting": "Rate this meeting",
+  "@rateThisMeeting": { "description": "Label above the star rating selector for a meeting" },
+
+  "reviewQuestionsManagementTitle": "Review Questions",
+  "@reviewQuestionsManagementTitle": { "description": "Title for review questions management screen" },
+
+  "addReviewQuestion": "Add Question",
+  "@addReviewQuestion": { "description": "Button label to add a review question" },
+
+  "editReviewQuestion": "Edit Question",
+  "@editReviewQuestion": { "description": "Button label to edit a review question" },
+
+  "deleteReviewQuestion": "Delete Question",
+  "@deleteReviewQuestion": { "description": "Button label to delete a review question" },
+
+  "reviewQuestionLabel": "Question",
+  "@reviewQuestionLabel": { "description": "Label for review question text field" },
+
+  "reviewQuestionHint": "Enter the review question",
+  "@reviewQuestionHint": { "description": "Hint for review question text field" },
+
+  "reviewQuestionOrderLabel": "Order",
+  "@reviewQuestionOrderLabel": { "description": "Label for review question order field" },
+
+  "reviewQuestionOrderHint": "Enter display order (number)",
+  "@reviewQuestionOrderHint": { "description": "Hint for review question order field" },
+
+  "reviewQuestionOrderInvalid": "Order must be a valid number",
+  "@reviewQuestionOrderInvalid": { "description": "Validation error for review question order" },
+
+  "reviewQuestionCreatedSuccess": "Question created successfully",
+  "@reviewQuestionCreatedSuccess": { "description": "Snackbar after creating a review question" },
+
+  "reviewQuestionUpdatedSuccess": "Question updated successfully",
+  "@reviewQuestionUpdatedSuccess": { "description": "Snackbar after updating a review question" },
+
+  "reviewQuestionDeletedSuccess": "Question deleted successfully",
+  "@reviewQuestionDeletedSuccess": { "description": "Snackbar after deleting a review question" },
+
+  "reviewQuestionSaveError": "Error saving question. Please try again.",
+  "@reviewQuestionSaveError": { "description": "Snackbar when saving a review question fails" },
+
+  "reviewQuestionDeleteError": "Error deleting question. Please try again.",
+  "@reviewQuestionDeleteError": { "description": "Snackbar when deleting a review question fails" },
+
+  "deleteReviewQuestionConfirm": "Delete this review question?",
+  "@deleteReviewQuestionConfirm": { "description": "Confirmation dialog for deleting a review question" },
+
+  "noReviewQuestions": "No review questions yet.",
+  "@noReviewQuestions": { "description": "Empty state for review questions list" },
+
+  "reviewQuestionsForBook": "Review Questions",
+  "@reviewQuestionsForBook": { "description": "Section label for selecting review questions in book form" },
+
+  "finalReviewTitle": "Final Review",
+  "@finalReviewTitle": { "description": "Section title for the final review form" },
+
+  "favoritePhrases": "Favorite Phrases",
+  "@favoritePhrases": { "description": "Label for favorite phrases field in final review" },
+
+  "favoritePhraseRequired": "Add at least one favorite phrase from the book.",
+  "@favoritePhraseRequired": { "description": "Hint below favorite phrases label indicating it is required" },
+
+  "favoritePhraseRequiredError": "Add at least one favorite phrase before submitting.",
+  "@favoritePhraseRequiredError": { "description": "Validation error when no favorite phrase has been added" },
+
+  "favoritePhrasesHint": "Enter a favorite phrase and press Add",
+  "@favoritePhrasesHint": { "description": "Hint for favorite phrases input" },
+
+  "addPhrase": "Add",
+  "@addPhrase": { "description": "Button label to add a phrase" },
+
+  "submitReview": "Submit Review",
+  "@submitReview": { "description": "Button label to submit the final review" },
+
+  "reviewSubmittedSuccess": "Review submitted successfully",
+  "@reviewSubmittedSuccess": { "description": "Snackbar after submitting a final review" },
+
+  "noReviewQuestionsConfigured": "This book has no review questions configured yet. A leader must add questions before reviews can be submitted.",
+  "@noReviewQuestionsConfigured": { "description": "Message when a book has no review questions assigned" },
+
+  "reviewSubmitError": "Error submitting review. Please try again.",
+  "@reviewSubmitError": { "description": "Snackbar when submitting a final review fails" },
+
+  "allReviewsTitle": "Member Reviews",
+  "@allReviewsTitle": { "description": "Section title for all member reviews in book detail" },
+
+  "noReviewsYet": "No reviews yet.",
+  "@noReviewsYet": { "description": "Empty state for reviews list" },
+
+  "reviewByAuthor": "Review by {authorId}",
+  "@reviewByAuthor": {
+    "description": "Label showing who wrote a review",
+    "placeholders": { "authorId": { "type": "String" } }
+  },
+
+  "answerLabel": "Answer: {answer}",
+  "@answerLabel": {
+    "description": "Label showing an answer to a review question",
+    "placeholders": { "answer": { "type": "String" } }
+  },
+
+  "reviewQuestionsManagementRoute": "Review Questions Management",
+  "@reviewQuestionsManagementRoute": { "description": "Navigation label for review questions management" },
+
+  "networkError": "Network error. Please check your connection and try again.",
+  "@networkError": { "description": "Generic network error message shown in SnackBar" },
+
+  "permissionDenied": "You don't have permission to perform this action.",
+  "@permissionDenied": { "description": "Error message when Firestore permission is denied" },
+
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": { "description": "Link to password recovery screen" },
+
+  "passwordRecoveryTitle": "Reset Password",
+  "@passwordRecoveryTitle": { "description": "Title for password recovery screen" },
+
+  "passwordRecoveryDescription": "Enter your email address and we'll send you a link to reset your password.",
+  "@passwordRecoveryDescription": { "description": "Description on password recovery screen" },
+
+  "sendResetLink": "Send Reset Link",
+  "@sendResetLink": { "description": "Button label to send password reset email" },
+
+  "passwordResetSent": "Password reset email sent successfully. Please check your email.",
+  "@passwordResetSent": { "description": "Success message after sending password reset email" },
+
+  "passwordResetError": "Error sending password reset email. Please try again.",
+  "@passwordResetError": { "description": "Error message when password reset email fails" },
+
+  "backToSignIn": "Back to Sign In",
+  "@backToSignIn": { "description": "Button label to return to sign in screen" },
+
+  "registerTitle": "Create Account",
+  "@registerTitle": { "description": "Title for registration screen" },
+
+  "nameLabel": "Name",
+  "@nameLabel": { "description": "Label for name field in registration form" },
+
+  "nameHint": "Enter your name",
+  "@nameHint": { "description": "Hint for name field in registration form" },
+
+  "emailLabel": "Email",
+  "@emailLabel": { "description": "Label for email field in registration form" },
+
+  "passwordLabel": "Password",
+  "@passwordLabel": { "description": "Label for password field in registration form" },
+
+  "confirmPasswordLabel": "Confirm Password",
+  "@confirmPasswordLabel": { "description": "Label for confirm password field" },
+
+  "confirmPasswordHint": "Re-enter your password",
+  "@confirmPasswordHint": { "description": "Hint for confirm password field" },
+
+  "registerButton": "Register",
+  "@registerButton": { "description": "Submit button label for registration form" },
+
+  "alreadyHaveAccount": "Already have an account? Sign in",
+  "@alreadyHaveAccount": { "description": "Link back to login from registration screen" },
+
+  "nameRequired": "Name is required",
+  "@nameRequired": { "description": "Validation error when name is empty" },
+
+  "weakPassword": "Password must be at least 8 characters with uppercase, lowercase and number",
+  "@weakPassword": { "description": "Validation error for weak password in registration" },
+
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": { "description": "Validation error when passwords do not match" },
+
+  "registrationSuccess": "Account created successfully",
+  "@registrationSuccess": { "description": "Snackbar shown after successful registration" },
+
+  "emailAlreadyInUse": "This email is already registered",
+  "@emailAlreadyInUse": { "description": "Error shown when email is already in use" },
+
+  "homeScreenTitle": "Home",
+  "@homeScreenTitle": { "description": "Title for the home screen" },
+
+  "profileTitle": "My Profile",
+  "@profileTitle": { "description": "Title for the profile screen" },
+
+  "editProfile": "Edit Profile",
+  "@editProfile": { "description": "Button label to edit profile" },
+
+  "registrationDate": "Member since: {date}",
+  "@registrationDate": {
+    "description": "Label showing user registration date",
+    "placeholders": { "date": { "type": "String" } }
+  },
+
+  "noPhotoAvailable": "No photo available",
+  "@noPhotoAvailable": { "description": "Accessibility label when no profile photo is available" },
+
+  "signOutConfirmTitle": "Sign Out",
+  "@signOutConfirmTitle": { "description": "Title for sign out confirmation dialog" },
+
+  "signOutConfirmMessage": "Are you sure you want to sign out?",
+  "@signOutConfirmMessage": { "description": "Message for sign out confirmation dialog" },
+
+  "editProfileTitle": "Edit Profile",
+  "@editProfileTitle": { "description": "Title for edit profile screen" },
+
+  "displayNameLabel": "Name",
+  "@displayNameLabel": { "description": "Label for display name field in edit profile" },
+
+  "displayNameHint": "Enter your name",
+  "@displayNameHint": { "description": "Hint for display name field in edit profile" },
+
+  "displayNameRequired": "Name cannot be empty",
+  "@displayNameRequired": { "description": "Validation error when display name is empty" },
+
+  "profilePhotoLabel": "Profile Photo",
+  "@profilePhotoLabel": { "description": "Label for profile photo section in edit profile" },
+
+  "changePhoto": "Change Photo",
+  "@changePhoto": { "description": "Button label to change profile photo" },
+
+  "selectPhoto": "Select Photo",
+  "@selectPhoto": { "description": "Button label to select a profile photo" },
+
+  "profileUpdatedSuccess": "Profile updated successfully",
+  "@profileUpdatedSuccess": { "description": "Snackbar shown after updating profile" },
+
+  "profileUpdateError": "Error updating profile. Please try again.",
+  "@profileUpdateError": { "description": "Snackbar shown when updating profile fails" },
+
+  "libraryTitle": "My Library",
+  "@libraryTitle": { "description": "Title for the personal library screen" },
+
+  "libraryTabWantToRead": "Want to Read",
+  "@libraryTabWantToRead": { "description": "Tab label for books the user wants to read" },
+
+  "libraryTabReading": "Reading",
+  "@libraryTabReading": { "description": "Tab label for books currently being read" },
+
+  "libraryTabRead": "Read",
+  "@libraryTabRead": { "description": "Tab label for books already read" },
+
+  "libraryEmptyWantToRead": "No books in your want-to-read list yet.",
+  "@libraryEmptyWantToRead": { "description": "Empty state for want-to-read tab" },
+
+  "libraryEmptyReading": "You are not currently reading any books.",
+  "@libraryEmptyReading": { "description": "Empty state for reading tab" },
+
+  "libraryEmptyRead": "You have not marked any books as read yet.",
+  "@libraryEmptyRead": { "description": "Empty state for read tab" },
+
+  "libraryErrorLoading": "Error loading your library. Please try again.",
+  "@libraryErrorLoading": { "description": "Error message for library screen" },
+
+  "libraryChangeCategory": "Change category",
+  "@libraryChangeCategory": { "description": "Popup menu label to change a book's category" },
+
+  "libraryRemoveFromLibrary": "Remove from library",
+  "@libraryRemoveFromLibrary": { "description": "Popup menu label to remove a book from the library" },
+
+  "libraryCategoryWantToRead": "Want to read",
+  "@libraryCategoryWantToRead": { "description": "Category label: want to read" },
+
+  "libraryCategoryReading": "Reading",
+  "@libraryCategoryReading": { "description": "Category label: reading" },
+
+  "libraryCategoryRead": "Read",
+  "@libraryCategoryRead": { "description": "Category label: read" },
+
+  "libraryCategoryChangedSuccess": "Category updated",
+  "@libraryCategoryChangedSuccess": { "description": "Snackbar after changing a book's category" },
+
+  "libraryRemovedSuccess": "Book removed from library",
+  "@libraryRemovedSuccess": { "description": "Snackbar after removing a book from the library" },
+
+  "libraryCategoryChangeError": "Error updating category. Please try again.",
+  "@libraryCategoryChangeError": { "description": "Snackbar when changing category fails" },
+
+  "libraryRemoveError": "Error removing book. Please try again.",
+  "@libraryRemoveError": { "description": "Snackbar when removing a book fails" },
+
+  "ratingCommentLabel": "Comment (optional)",
+  "@ratingCommentLabel": { "description": "Label for the optional comment field in the meeting rating widget" },
+
+  "ratingCommentHint": "Share your thoughts about this meeting...",
+  "@ratingCommentHint": { "description": "Hint text for the optional comment field in the meeting rating widget" },
+
+  "saveRatingComment": "Save",
+  "@saveRatingComment": { "description": "Button label to save the rating with its optional comment" },
+
+  "yourRating": "Your rating:",
+  "@yourRating": { "description": "Label shown before the user's current rating summary" },
+
+  "yourRatingValue": "{value}/5",
+  "@yourRatingValue": {
+    "description": "Shows the numeric value of the user's rating",
+    "placeholders": { "value": { "type": "int" } }
+  },
+
+  "yourRatingComment": "Your comment:",
+  "@yourRatingComment": { "description": "Label shown before the user's existing rating comment" },
+
+  "editRating": "Edit rating",
+  "@editRating": { "description": "Button label to expand the rating edit controls" },
+
+  "ratingsScreenTitle": "Member Ratings",
+  "@ratingsScreenTitle": { "description": "Title for the ratings screen showing all member ratings" },
+
+  "noRatingsForMeeting": "No ratings yet for this meeting.",
+  "@noRatingsForMeeting": { "description": "Empty state for ratings screen" },
+
+  "sortByScore": "Sort by score",
+  "@sortByScore": { "description": "Sort option: by score" },
+
+  "sortByName": "Sort by name",
+  "@sortByName": { "description": "Sort option: by name" },
+
+  "ratingValue": "{value}/5",
+  "@ratingValue": {
+    "description": "Shows the numeric value of a rating",
+    "placeholders": { "value": { "type": "int" } }
+  },
+
+  "viewAllRatings": "View all ratings",
+  "@viewAllRatings": { "description": "Button/link to open the ratings screen" },
+
+  "personalBooksTitle": "My Personal Books",
+  "@personalBooksTitle": { "description": "Title for the personal books screen" },
+
+  "personalBookStatusWantToRead": "Want to Read",
+  "@personalBookStatusWantToRead": { "description": "Status label for want to read" },
+
+  "personalBookStatusReading": "Reading",
+  "@personalBookStatusReading": { "description": "Status label for currently reading" },
+
+  "personalBookStatusRead": "Read",
+  "@personalBookStatusRead": { "description": "Status label for read books" },
+
+  "personalBookEmptyTitle": "No personal books yet",
+  "@personalBookEmptyTitle": { "description": "Empty state title for personal books list" },
+
+  "personalBookEmptyMessage": "Add your first book to start tracking your personal reading.",
+  "@personalBookEmptyMessage": { "description": "Empty state message for personal books list" },
+
+  "addPersonalBook": "Add Book",
+  "@addPersonalBook": { "description": "Button label to add a personal book" },
+
+  "personalBookTitleLabel": "Title",
+  "@personalBookTitleLabel": { "description": "Label for title field in personal book form" },
+
+  "personalBookTitleHint": "Enter book title",
+  "@personalBookTitleHint": { "description": "Hint for title field in personal book form" },
+
+  "personalBookAuthorLabel": "Author",
+  "@personalBookAuthorLabel": { "description": "Label for author field in personal book form" },
+
+  "personalBookAuthorHint": "Enter author name",
+  "@personalBookAuthorHint": { "description": "Hint for author field in personal book form" },
+
+  "personalBookDescriptionLabel": "Description",
+  "@personalBookDescriptionLabel": { "description": "Label for description field in personal book form" },
+
+  "personalBookDescriptionHint": "Enter book description (optional)",
+  "@personalBookDescriptionHint": { "description": "Hint for description field in personal book form" },
+
+  "personalBookCoverLabel": "Cover Image",
+  "@personalBookCoverLabel": { "description": "Label for cover image in personal book form" },
+
+  "personalBookCoverHint": "Tap to select a cover image",
+  "@personalBookCoverHint": { "description": "Hint for cover image picker in personal book form" },
+
+  "personalBookStatusLabel": "Status",
+  "@personalBookStatusLabel": { "description": "Label for status dropdown in personal book form" },
+
+  "personalBookNotesLabel": "Comments",
+  "@personalBookNotesLabel": { "description": "Label for comments field in personal book detail" },
+
+  "personalBookNotesHint": "Write your personal comments about this book...",
+  "@personalBookNotesHint": { "description": "Hint for comments field in personal book detail" },
+
+  "personalBookRatingLabel": "Your Rating",
+  "@personalBookRatingLabel": { "description": "Label for rating widget in personal book detail" },
+
+  "personalBookRatingValue": "{value}/5",
+  "@personalBookRatingValue": {
+    "description": "Shows the numeric value of the rating",
+    "placeholders": { "value": { "type": "int" } }
+  },
+
+  "personalBookRatingOnlyForRead": "You can only rate books that have been marked as read",
+  "@personalBookRatingOnlyForRead": { "description": "Message shown when trying to rate a book that is not read" },
+
+  "personalBookNoteTooLong": "Comment must not exceed {max} characters (current: {current})",
+  "@personalBookNoteTooLong": {
+    "description": "Error message when comment exceeds maximum length",
+    "placeholders": { "max": { "type": "int" }, "current": { "type": "int" } }
+  },
+
+  "personalBookCreatedSuccess": "Book added to your personal library",
+  "@personalBookCreatedSuccess": { "description": "Snackbar shown after creating a personal book" },
+
+  "personalBookUpdatedSuccess": "Book updated successfully",
+  "@personalBookUpdatedSuccess": { "description": "Snackbar shown after updating a personal book" },
+
+  "personalBookDeletedSuccess": "Book removed from your personal library",
+  "@personalBookDeletedSuccess": { "description": "Snackbar shown after deleting a personal book" },
+
+  "personalBookSaveError": "Error saving book. Please try again.",
+  "@personalBookSaveError": { "description": "Snackbar shown when saving a personal book fails" },
+
+  "personalBookDeleteError": "Error deleting book. Please try again.",
+  "@personalBookDeleteError": { "description": "Snackbar shown when deleting a personal book fails" },
+
+  "personalBookDeleteConfirm": "Delete this book from your personal library?",
+  "@personalBookDeleteConfirm": { "description": "Confirmation dialog for deleting a personal book" },
+
+  "personalBookErrorLoading": "Error loading your books. Please try again.",
+  "@personalBookErrorLoading": { "description": "Error message for personal books screen" },
+
+  "personalBookFilterAll": "All",
+  "@personalBookFilterAll": { "description": "Filter option to show all books" },
+
+  "personalBookStartedAt": "Started reading",
+  "@personalBookStartedAt": { "description": "Label for started reading date" },
+
+  "personalBookFinishedAt": "Finished reading",
+  "@personalBookFinishedAt": { "description": "Label for finished reading date" },
+
+  "retry": "Retry",
+  "@retry": { "description": "Retry button label" },
+
+  "personalBookReviewTitle": "Book Review",
+  "@personalBookReviewTitle": { "description": "Title for personal book review section" },
+
+  "personalBookReviewThoughtsLabel": "Your Thoughts",
+  "@personalBookReviewThoughtsLabel": { "description": "Label for thoughts field in personal book review" },
+
+  "personalBookReviewThoughtsHint": "Share your overall thoughts about this book...",
+  "@personalBookReviewThoughtsHint": { "description": "Hint for thoughts field in personal book review" },
+
+  "personalBookReviewSubmittedSuccess": "Review submitted successfully",
+  "@personalBookReviewSubmittedSuccess": { "description": "Snackbar shown after submitting a personal book review" },
+
+  "personalBookReviewSubmitError": "Error submitting review. Please try again.",
+  "@personalBookReviewSubmitError": { "description": "Snackbar shown when submitting a personal book review fails" },
+
+  "selectReviewQuestions": "Select Review Questions",
+  "@selectReviewQuestions": { "description": "Title for question selection section" },
+
+  "selectReviewQuestionsHint": "Choose which questions you want to answer about this book",
+  "@selectReviewQuestionsHint": { "description": "Hint text for question selection" },
+
+  "questionsSelected": "questions selected",
+  "@questionsSelected": { "description": "Label showing number of selected questions" },
+
+  "answerSelectedQuestions": "Answer Selected Questions",
+  "@answerSelectedQuestions": { "description": "Title for question answers section" },
+
+  "noQuestionsSelected": "No questions selected. Please select at least one question above.",
+  "@noQuestionsSelected": { "description": "Message when no questions are selected" },
+
+  "question": "Question",
+  "@question": { "description": "Label for question field" },
+
+  "answerPlaceholder": "Your answer...",
+  "@answerPlaceholder": { "description": "Hint for answer field" },
+
+  "selectedQuestions": "Selected Questions",
+  "@selectedQuestions": { "description": "Label for selected questions section in summary" },
+
+  "questionAnswers": "Question Answers",
+  "@questionAnswers": { "description": "Label for question answers section in summary" },
+
+  "continueText": "Continue",
+  "@continueText": { "description": "Button label to continue to next step" },
+
+  "questionWithNumber": "Question {number}:",
+  "@questionWithNumber": { "description": "Label for question with number", "placeholders": { "number": { "type": "int" } } },
+
+  "userManagementTitle": "User Management",
+  "@userManagementTitle": { "description": "Title for user management screen" },
+
+  "errorLoadingUsers": "Error loading users. Please try again.",
+  "@errorLoadingUsers": { "description": "Error message when loading users fails" },
+
+  "noUsersFound": "No users found.",
+  "@noUsersFound": { "description": "Message when no users are found" },
+
+  "noName": "No name",
+  "@noName": { "description": "Placeholder when user has no display name" },
+
+  "you": "You",
+  "@you": { "description": "Label to indicate current user" },
+
+  "leader": "Leader",
+  "@leader": { "description": "Label for leader role" },
+
+  "member": "Member",
+  "@member": { "description": "Label for member role" },
+
+  "active": "Active",
+  "@active": { "description": "Label for active membership status" },
+
+  "pending": "Pending",
+  "@pending": { "description": "Label for pending membership status" },
+
+  "inactive": "Inactive",
+  "@inactive": { "description": "Label for inactive/rejected membership status" },
+
+  "unknown": "Unknown",
+  "@unknown": { "description": "Label for unknown status" },
+
+  "makeAMember": "Make member",
+  "@makeAMember": { "description": "Button label to change user role to member" },
+
+  "makeALeader": "Make leader",
+  "@makeALeader": { "description": "Button label to change user role to leader" },
+
+  "deactivate": "Deactivate",
+  "@deactivate": { "description": "Button label to deactivate a user" },
+
+  "reactivate": "Reactivate",
+  "@reactivate": { "description": "Button label to reactivate a user" },
+
+  "roleUpdatedSuccess": "Role updated successfully",
+  "@roleUpdatedSuccess": { "description": "Snackbar shown after successfully updating user role" },
+
+  "roleUpdateError": "Error updating role. Please try again.",
+  "@roleUpdateError": { "description": "Snackbar shown when updating user role fails" },
+
+  "confirmDeactivation": "Confirm Deactivation",
+  "@confirmDeactivation": { "description": "Title for deactivation confirmation dialog" },
+
+  "deactivationWarning": "Are you sure you want to deactivate this user? The user will lose access to the application.",
+  "@deactivationWarning": { "description": "Warning message in deactivation confirmation dialog" },
+
+  "userDeactivatedSuccess": "User deactivated successfully",
+  "@userDeactivatedSuccess": { "description": "Snackbar shown after successfully deactivating a user" },
+
+  "userReactivatedSuccess": "User reactivated successfully",
+  "@userReactivatedSuccess": { "description": "Snackbar shown after successfully reactivating a user" },
+
+  "userActionError": "Error performing action. Please try again.",
+  "@userActionError": { "description": "Snackbar shown when a user action fails" },
+
+  "allUsers": "All Users",
+  "@allUsers": { "description": "Tab label for all users in member management screen" },
+
+  "themeDialogTitle": "Select Theme",
+  "@themeDialogTitle": { "description": "Title for theme selection dialog" },
+
+  "themeSystem": "System",
+  "@themeSystem": { "description": "System theme option" },
+
+  "themeSystemDescription": "Use system theme",
+  "@themeSystemDescription": { "description": "Description for system theme option" },
+
+  "themeLight": "Light",
+  "@themeLight": { "description": "Light theme option" },
+
+  "themeLightDescription": "Light theme",
+  "@themeLightDescription": { "description": "Description for light theme option" },
+
+  "themeDark": "Dark",
+  "@themeDark": { "description": "Dark theme option" },
+
+  "themeDarkDescription": "Dark theme",
+  "@themeDarkDescription": { "description": "Description for dark theme option" },
+
+  "languageDialogTitle": "Select Language",
+  "@languageDialogTitle": { "description": "Title for language selection dialog" },
+
+  "languageSystem": "System",
+  "@languageSystem": { "description": "System language option" },
+
+  "languageSystemDescription": "Use system language",
+  "@languageSystemDescription": { "description": "Description for system language option" },
+
+  "languageEnglish": "English",
+  "@languageEnglish": { "description": "English language option" },
+
+  "languageEnglishDescription": "English",
+  "@languageEnglishDescription": { "description": "Description for English language option" },
+
+  "languageSpanish": "Spanish",
+  "@languageSpanish": { "description": "Spanish language option" },
+
+  "languageSpanishDescription": "Español",
+  "@languageSpanishDescription": { "description": "Description for Spanish language option" },
+
+  "language": "Language",
+  "@language": { "description": "Label for language setting" },
+
+  "theme": "Theme",
+  "@theme": { "description": "Label for theme setting" },
+
+  "settings": "Settings",
+  "@settings": { "description": "Label for settings section" }
+}
