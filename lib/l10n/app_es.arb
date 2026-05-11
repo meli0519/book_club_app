@@ -516,5 +516,11 @@
   "@theme": { "description": "Label for theme setting" },
 
   "settings": "Configuración",
-  "@settings": { "description": "Label for settings section" }
+  "@settings": { "description": "Label for settings section" },
+
+  "bookStartDate": "Fecha de inicio",
+  "@bookStartDate": { "description": "Label for book start date field" },
+
+  "bookEndDate": "Fecha de fin",
+  "@bookEndDate": { "description": "Label for book end date field" }
 }

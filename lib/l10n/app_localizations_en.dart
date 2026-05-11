@@ -959,4 +959,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settings => 'Settings';
+
+  @override
+  String get bookStartDate => 'Start Date';
+
+  @override
+  String get bookEndDate => 'End Date';
 }

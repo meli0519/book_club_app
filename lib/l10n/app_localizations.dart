@@ -1885,6 +1885,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
+
+  /// Label for book start date field
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get bookStartDate;
+
+  /// Label for book end date field
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get bookEndDate;
 }
 
 class _AppLocalizationsDelegate

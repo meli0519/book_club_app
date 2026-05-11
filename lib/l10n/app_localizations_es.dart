@@ -988,4 +988,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get settings => 'Configuración';
+
+  @override
+  String get bookStartDate => 'Fecha de inicio';
+
+  @override
+  String get bookEndDate => 'Fecha de fin';
 }

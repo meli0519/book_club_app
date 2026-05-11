@@ -10,6 +10,8 @@ class Book {
   final String createdBy;
   final DateTime createdAt;
   final DateTime? finishedAt;
+  final DateTime? startDate;
+  final DateTime? endDate;
   final List<String> reviewQuestionIds; // IDs de las preguntas de reseña
 
   const Book({
@@ -22,6 +24,8 @@ class Book {
     required this.createdBy,
     required this.createdAt,
     this.finishedAt,
+    this.startDate,
+    this.endDate,
     this.reviewQuestionIds = const [],
   });
 
@@ -40,6 +44,12 @@ class Book {
             : DateTime.now(),
         finishedAt: map['finishedAt'] != null
             ? (map['finishedAt'] as Timestamp).toDate()
+            : null,
+        startDate: map['startDate'] != null
+            ? (map['startDate'] as Timestamp).toDate()
+            : null,
+        endDate: map['endDate'] != null
+            ? (map['endDate'] as Timestamp).toDate()
             : null,
         reviewQuestionIds: map['reviewQuestionIds'] != null
             ? List<String>.from(map['reviewQuestionIds'] as List)
@@ -60,6 +70,8 @@ class Book {
       'createdBy': createdBy,
       'createdAt': Timestamp.fromDate(createdAt),
       if (finishedAt != null) 'finishedAt': Timestamp.fromDate(finishedAt!),
+      if (startDate != null) 'startDate': Timestamp.fromDate(startDate!),
+      if (endDate != null) 'endDate': Timestamp.fromDate(endDate!),
       'reviewQuestionIds': reviewQuestionIds,
     };
   }

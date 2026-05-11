@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +33,8 @@ class _CreateEditBookScreenState extends ConsumerState<CreateEditBookScreen> {
   String? _coverFileName;
   bool _isSaving = false;
   List<String> _selectedQuestionIds = [];
+  DateTime? _startDate;
+  DateTime? _endDate;
 
   bool get _isEditMode => widget.book != null;
 
@@ -43,6 +46,8 @@ class _CreateEditBookScreenState extends ConsumerState<CreateEditBookScreen> {
       _authorController.text = widget.book!.author;
       _descriptionController.text = widget.book!.description;
       _selectedQuestionIds = List<String>.from(widget.book!.reviewQuestionIds);
+      _startDate = widget.book!.startDate;
+      _endDate = widget.book!.endDate;
     }
   }
 
@@ -52,6 +57,25 @@ class _CreateEditBookScreenState extends ConsumerState<CreateEditBookScreen> {
     _authorController.dispose();
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickDate({required bool isStart}) async {
+    final now = DateTime.now();
+    final initial = isStart ? (_startDate ?? now) : (_endDate ?? now);
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: initial,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked == null) return;
+    setState(() {
+      if (isStart) {
+        _startDate = picked;
+      } else {
+        _endDate = picked;
+      }
+    });
   }
 
   Future<void> _pickImage() async {
@@ -106,6 +130,11 @@ class _CreateEditBookScreenState extends ConsumerState<CreateEditBookScreen> {
         }
         // Always update reviewQuestionIds (may have changed)
         changedFields['reviewQuestionIds'] = _selectedQuestionIds;
+        // Update startDate and endDate (null clears the field)
+        changedFields['startDate'] =
+            _startDate != null ? Timestamp.fromDate(_startDate!) : null;
+        changedFields['endDate'] =
+            _endDate != null ? Timestamp.fromDate(_endDate!) : null;
         if (changedFields.isNotEmpty) {
           await bookService.updateBook(widget.book!.id, changedFields);
         }        if (mounted) {
@@ -125,6 +154,8 @@ class _CreateEditBookScreenState extends ConsumerState<CreateEditBookScreen> {
           status: 'reading',
           createdBy: currentUser?.uid ?? '',
           createdAt: DateTime.now(),
+          startDate: _startDate,
+          endDate: _endDate,
           reviewQuestionIds: _selectedQuestionIds,
         );
         await bookService.createBook(book, _coverImageBytes!, _coverFileName!);
@@ -199,6 +230,24 @@ class _CreateEditBookScreenState extends ConsumerState<CreateEditBookScreen> {
                         hintText: l10n.bookDescriptionHint,
                       ),
                       maxLines: 3,
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Start date
+                    _DatePickerField(
+                      label: l10n.bookStartDate,
+                      selectedDate: _startDate,
+                      onTap: () => _pickDate(isStart: true),
+                      onClear: () => setState(() => _startDate = null),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // End date
+                    _DatePickerField(
+                      label: l10n.bookEndDate,
+                      selectedDate: _endDate,
+                      onTap: () => _pickDate(isStart: false),
+                      onClear: () => setState(() => _endDate = null),
                     ),
                     const SizedBox(height: 24),
 
@@ -305,6 +354,59 @@ class _CreateEditBookScreenState extends ConsumerState<CreateEditBookScreen> {
             Text(l10n.selectImage,
                 style: const TextStyle(color: Colors.grey)),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Date picker field widget
+// ---------------------------------------------------------------------------
+
+class _DatePickerField extends StatelessWidget {
+  final String label;
+  final DateTime? selectedDate;
+  final VoidCallback onTap;
+  final VoidCallback onClear;
+
+  const _DatePickerField({
+    required this.label,
+    required this.selectedDate,
+    required this.onTap,
+    required this.onClear,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final formatted = selectedDate != null
+        ? '${selectedDate!.day.toString().padLeft(2, '0')}/'
+            '${selectedDate!.month.toString().padLeft(2, '0')}/'
+            '${selectedDate!.year}'
+        : null;
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(4),
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: label,
+          suffixIcon: selectedDate != null
+              ? IconButton(
+                  icon: const Icon(Icons.clear, size: 18),
+                  onPressed: onClear,
+                  tooltip: 'Clear',
+                )
+              : const Icon(Icons.calendar_today, size: 18),
+        ),
+        child: Text(
+          formatted ?? '',
+          style: formatted == null
+              ? Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: Colors.transparent)
+              : Theme.of(context).textTheme.bodyMedium,
         ),
       ),
     );
