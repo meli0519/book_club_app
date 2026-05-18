@@ -105,9 +105,6 @@
   "meetingDate": "Fecha",
   "meetingNotes": "Notas",
   "meetingNotesHint": "Ingresa las notas de la reunión",
-  "meetingPartialRating": "Calificación parcial (1–5)",
-  "meetingPartialRatingHint": "Ingresa una calificación entre 1 y 5",
-  "meetingRatingInvalid": "La calificación debe ser un número entre 1 y 5",
   "meetingCreatedSuccess": "Reunión creada exitosamente",
   "meetingUpdatedSuccess": "Reunión actualizada exitosamente",
   "meetingSaveError": "Error al guardar la reunión. Por favor, inténtalo de nuevo.",
@@ -115,7 +112,6 @@
   "meetingDeleteError": "Error al eliminar la reunión. Por favor, inténtalo de nuevo.",
   "deleteMeetingConfirm": "¿Eliminar esta reunión?",
   "meetingScreenTitle": "Reuniones",
-  "partialRating": "Calificación: {rating}★",
   "selectDate": "Seleccionar fecha",
 
   "addComment": "Agregar comentario",
@@ -305,7 +301,7 @@
   "personalBookRatingValue": "{value}/5",
   "@personalBookRatingValue": {
     "description": "Shows the numeric value of the rating",
-    "placeholders": { "value": { "type": "int" } }
+    "placeholders": { "value": { "type": "double", "format": "decimalPattern" } }
   },
 
   "personalBookRatingOnlyForRead": "Solo puedes calificar libros que hayan sido marcados como leídos",
@@ -522,5 +518,68 @@
   "@bookStartDate": { "description": "Label for book start date field" },
 
   "bookEndDate": "Fecha de fin",
-  "@bookEndDate": { "description": "Label for book end date field" }
+  "@bookEndDate": { "description": "Label for book end date field" },
+
+  "stickerPickerTitle": "Stickers",
+  "@stickerPickerTitle": { "description": "Title for the sticker picker bottom sheet" },
+
+  "stickerPickerConfirm": "Confirmar",
+  "@stickerPickerConfirm": { "description": "Confirm button label in sticker picker" },
+
+  "stickerButtonTooltip": "Agregar sticker",
+  "@stickerButtonTooltip": { "description": "Tooltip for the sticker button in comment form and note field" },
+
+  "stickerLimitReached": "Límite de stickers alcanzado (máx. {max})",
+  "@stickerLimitReached": {
+    "description": "Message shown when the sticker limit is reached",
+    "placeholders": { "max": { "type": "int" } }
+  },
+
+  "stickerGalleryTitle": "Mis Stickers",
+  "@stickerGalleryTitle": { "description": "Title for sticker gallery screen" },
+
+  "uploadStickerButton": "Subir Sticker",
+  "@uploadStickerButton": { "description": "Button label to upload a new sticker" },
+
+  "noStickersMessage": "No tienes stickers. ¡Sube tu primer sticker!",
+  "@noStickersMessage": { "description": "Empty state message when user has no stickers" },
+
+  "deleteStickerConfirm": "¿Eliminar este sticker?",
+  "@deleteStickerConfirm": { "description": "Confirmation dialog for deleting a sticker" },
+
+  "stickerUploadSuccess": "Sticker subido exitosamente",
+  "@stickerUploadSuccess": { "description": "Snackbar shown after successfully uploading a sticker" },
+
+  "stickerUploadError": "Error al subir sticker",
+  "@stickerUploadError": { "description": "Snackbar shown when uploading a sticker fails" },
+
+  "stickerDeleteSuccess": "Sticker eliminado",
+  "@stickerDeleteSuccess": { "description": "Snackbar shown after successfully deleting a sticker" },
+
+  "imageTooLarge": "La imagen debe ser menor a 2MB",
+  "@imageTooLarge": { "description": "Error message when image size exceeds limit" },
+
+  "invalidImageDimensions": "Las dimensiones deben estar entre 100×100 y 1024×1024",
+  "@invalidImageDimensions": { "description": "Error message when image dimensions are invalid" },
+
+  "invalidImageFormat": "Formato no válido. Usa PNG, JPG o WebP",
+  "@invalidImageFormat": { "description": "Error message when image format is not supported" },
+
+  "pleaseSignIn": "Por favor, inicia sesión",
+  "@pleaseSignIn": { "description": "Message shown when user needs to sign in" },
+
+  "editComment": "Editar comentario",
+  "@editComment": { "description": "Menu item to edit a comment" },
+
+  "deleteComment": "Eliminar comentario",
+  "@deleteComment": { "description": "Menu item to delete a comment" },
+
+  "deleteCommentConfirm": "¿Eliminar este comentario?",
+  "@deleteCommentConfirm": { "description": "Confirmation dialog title for deleting a comment" },
+
+  "commentDeleteError": "Error al eliminar el comentario. Por favor, inténtalo de nuevo.",
+  "@commentDeleteError": { "description": "Snackbar shown when deleting a comment fails" },
+
+  "commentEditError": "Error al editar el comentario. Por favor, inténtalo de nuevo.",
+  "@commentEditError": { "description": "Snackbar shown when editing a comment fails" }
 }

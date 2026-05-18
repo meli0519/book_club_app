@@ -109,7 +109,7 @@ class RatingService {
   }
 
   /// Returns the current user's rating for a book, or null if not rated.
-  Future<int?> getUserBookRating(String bookId, String userId) async {
+  Future<double?> getUserBookRating(String bookId, String userId) async {
     try {
       final doc = await _firestore
           .collection('books')
@@ -118,7 +118,7 @@ class RatingService {
           .doc(userId)
           .get();
       if (!doc.exists) return null;
-      return (doc.data()!['value'] as num).toInt();
+      return (doc.data()!['value'] as num).toDouble();
     } on FirebaseException catch (e) {
       throw Exception('Error getting user book rating: ${e.message}');
     } catch (e) {
@@ -145,7 +145,7 @@ class RatingService {
   }
 
   /// Returns the current user's rating for a meeting, or null if not rated.
-  Future<int?> getUserMeetingRating(String meetingId, String userId) async {
+  Future<double?> getUserMeetingRating(String meetingId, String userId) async {
     try {
       final doc = await _firestore
           .collection('meetings')
@@ -154,7 +154,7 @@ class RatingService {
           .doc(userId)
           .get();
       if (!doc.exists) return null;
-      return (doc.data()!['value'] as num).toInt();
+      return (doc.data()!['value'] as num).toDouble();
     } on FirebaseException catch (e) {
       throw Exception('Error getting user meeting rating: ${e.message}');
     } catch (e) {
@@ -194,7 +194,7 @@ class RatingService {
       final results = <RatingWithUser>[];
       for (final doc in snapshot.docs) {
         final authorId = doc.data()['authorId'] as String? ?? doc.id;
-        final value = (doc.data()['value'] as num?)?.toInt() ?? 0;
+        final value = (doc.data()['value'] as num?)?.toDouble() ?? 0.0;
         final comment = doc.data()['comment'] as String?;
 
         // Fetch display name, photo and email from users collection.

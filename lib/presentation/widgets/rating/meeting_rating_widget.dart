@@ -4,6 +4,8 @@ import '../../../l10n/app_localizations.dart';
 
 import '../../../domain/models/rating.dart';
 import '../../providers/rating_provider.dart';
+import '../comment/sticker_display.dart';
+import '../comment/sticker_picker.dart';
 import 'star_rating_selector.dart';
 
 /// Widget that handles rating a Meeting with an optional comment.
@@ -28,8 +30,9 @@ class _MeetingRatingWidgetState extends ConsumerState<MeetingRatingWidget> {
   bool _isSubmitting = false;
   bool _isEditing = false;
   final _commentController = TextEditingController();
-  int? _selectedRating;
+  double? _selectedRating;
   bool _initialized = false;
+  List<String> _selectedStickers = [];
 
   @override
   void dispose() {
@@ -46,10 +49,11 @@ class _MeetingRatingWidgetState extends ConsumerState<MeetingRatingWidget> {
     if (existing != null) {
       _selectedRating = existing.value;
       _commentController.text = existing.comment ?? '';
+      _selectedStickers = List<String>.from(existing.stickers);
     }
   }
 
-  Future<void> _submit(int value) async {
+  Future<void> _submit(double value) async {
     setState(() => _isSubmitting = true);
     try {
       final service = ref.read(ratingServiceProvider);
@@ -60,6 +64,7 @@ class _MeetingRatingWidgetState extends ConsumerState<MeetingRatingWidget> {
           authorId: widget.currentUserId,
           value: value,
           comment: comment.isNotEmpty ? comment : null,
+          stickers: _selectedStickers,
         ),
       );
       setState(() {
@@ -83,6 +88,20 @@ class _MeetingRatingWidgetState extends ConsumerState<MeetingRatingWidget> {
     final rating = _selectedRating;
     if (rating == null) return;
     await _submit(rating);
+  }
+
+  void _openStickerPicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      builder: (_) => StickerPicker(
+        userId: widget.currentUserId,
+        selectedStickers: _selectedStickers,
+        onConfirm: (urls) {
+          setState(() => _selectedStickers = urls);
+        },
+      ),
+    );
   }
 
   @override
@@ -128,7 +147,7 @@ class _MeetingRatingWidgetState extends ConsumerState<MeetingRatingWidget> {
                 )
               else
                 StarRatingSelectorWidget(
-                  currentRating: _selectedRating ?? 0,
+                  currentRating: _selectedRating ?? 0.0,
                   onRatingSelected: (v) => setState(() => _selectedRating = v),
                 ),
               const SizedBox(height: 12),
@@ -143,6 +162,56 @@ class _MeetingRatingWidgetState extends ConsumerState<MeetingRatingWidget> {
                   alignLabelWithHint: true,
                 ),
               ),
+              // ── Sticker preview ──────────────────────────────────────────
+              if (_selectedStickers.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: _selectedStickers.map((url) {
+                      return Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(
+                              url,
+                              width: 52,
+                              height: 52,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => const Icon(
+                                Icons.broken_image,
+                                size: 52,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: -6,
+                            right: -6,
+                            child: GestureDetector(
+                              onTap: () =>
+                                  setState(() => _selectedStickers.remove(url)),
+                              child: Container(
+                                width: 18,
+                                height: 18,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.error,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -156,6 +225,12 @@ class _MeetingRatingWidgetState extends ConsumerState<MeetingRatingWidget> {
                     ),
                     const SizedBox(width: 8),
                   ],
+                  IconButton(
+                    icon: const Icon(Icons.emoji_emotions_outlined),
+                    tooltip: l10n.stickerButtonTooltip,
+                    onPressed: () => _openStickerPicker(context),
+                  ),
+                  const SizedBox(width: 4),
                   FilledButton(
                     onPressed: (_isSubmitting || _selectedRating == null)
                         ? null
@@ -213,11 +288,17 @@ class _CurrentRatingSummary extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               ...List.generate(5, (i) {
-                final filled = (i + 1) <= rating.value;
+                final filled = (i + 1) <= rating.value.floor();
+                final isHalf = (i + 1) == rating.value.ceil() &&
+                    rating.value % 1 != 0;
                 return Icon(
-                  filled ? Icons.star : Icons.star_border,
+                  filled
+                      ? Icons.star
+                      : isHalf
+                          ? Icons.star_half
+                          : Icons.star_border,
                   size: 20,
-                  color: filled ? filledColor : emptyColor,
+                  color: (filled || isHalf) ? filledColor : emptyColor,
                 );
               }),
               const SizedBox(width: 6),
@@ -257,6 +338,10 @@ class _CurrentRatingSummary extends StatelessWidget {
               rating.comment!,
               style: theme.textTheme.bodySmall,
             ),
+          ],
+          if (rating.stickers.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            StickerDisplay(stickers: rating.stickers),
           ],
         ],
       ),

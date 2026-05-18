@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'personal_book_review.dart';
+import 'personal_note.dart';
 
 /// Status constants for a [PersonalBook].
 class PersonalBookStatus {
@@ -28,11 +29,11 @@ class PersonalBook {
   /// One of [PersonalBookStatus] constants: `want_to_read`, `reading`, `read`.
   final String status;
 
-  /// Personal notes written by the user. Maximum 5000 characters.
-  final String? notes;
+  /// Personal notes written by the user, ordered from newest to oldest.
+  final List<PersonalNote> notes;
 
-  /// Rating from 1 to 5. Only meaningful when [status] == `read`.
-  final int? rating;
+  /// Rating from 0.5 to 5.0 in 0.5 increments. Only meaningful when [status] == `read`.
+  final double? rating;
 
   /// Review with favorite phrases and thoughts. Only meaningful when [status] == `read`.
   final PersonalBookReview? review;
@@ -57,7 +58,7 @@ class PersonalBook {
     this.description,
     this.coverUrl,
     required this.status,
-    this.notes,
+    this.notes = const [],
     this.rating,
     this.review,
     this.reviewQuestionIds = const [],
@@ -81,8 +82,8 @@ class PersonalBook {
         description: map['description'] as String?,
         coverUrl: map['coverUrl'] as String?,
         status: map['status'] as String? ?? PersonalBookStatus.wantToRead,
-        notes: map['notes'] as String?,
-        rating: map['rating'] as int?,
+        notes: _parseNotes(map['notes']),
+        rating: map['rating'] != null ? (map['rating'] as num).toDouble() : null,
         review: map['review'] != null
             ? PersonalBookReview.fromMap(map['review'] as Map<String, dynamic>)
             : null,
@@ -115,7 +116,7 @@ class PersonalBook {
       if (description != null) 'description': description,
       if (coverUrl != null) 'coverUrl': coverUrl,
       'status': status,
-      if (notes != null) 'notes': notes,
+      if (notes.isNotEmpty) 'notes': notes.map((n) => n.toMap()).toList(),
       if (rating != null) 'rating': rating,
       if (review != null) 'review': review!.toMap(),
       'reviewQuestionIds': reviewQuestionIds,
@@ -125,4 +126,25 @@ class PersonalBook {
       if (finishedAt != null) 'finishedAt': Timestamp.fromDate(finishedAt!),
     };
   }
+}
+
+/// Parses the [notes] field from Firestore, handling legacy formats:
+/// - null → empty list
+/// - String (old format) → single PersonalNote with that text
+/// - List<Map> (new format) → list of PersonalNote
+List<PersonalNote> _parseNotes(dynamic raw) {
+  if (raw == null) return [];
+  // Legacy: notes was stored as a plain String
+  if (raw is String) {
+    if (raw.isEmpty) return [];
+    return [PersonalNote(text: raw, createdAt: DateTime.now())];
+  }
+  // New format: list of maps
+  if (raw is List) {
+    return raw
+        .whereType<Map>()
+        .map((n) => PersonalNote.fromMap(Map<String, dynamic>.from(n)))
+        .toList();
+  }
+  return [];
 }

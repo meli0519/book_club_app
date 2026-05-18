@@ -9,8 +9,8 @@ import '../rating/star_rating_selector.dart';
 /// Only visible/enabled when the book's status is 'read'.
 class PersonalRatingWidget extends StatelessWidget {
   final String status;
-  final int? currentRating;
-  final ValueChanged<int> onRatingChanged;
+  final double? currentRating;
+  final ValueChanged<double> onRatingChanged;
 
   const PersonalRatingWidget({
     required this.status,
@@ -37,7 +37,7 @@ class PersonalRatingWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         StarRatingSelectorWidget(
-          currentRating: currentRating ?? 0,
+          currentRating: currentRating ?? 0.0,
           onRatingSelected: onRatingChanged,
           starSize: 32,
         ),

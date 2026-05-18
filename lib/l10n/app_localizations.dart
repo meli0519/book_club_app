@@ -602,24 +602,6 @@ abstract class AppLocalizations {
   /// **'Enter meeting notes'**
   String get meetingNotesHint;
 
-  /// Label for meeting partial rating field
-  ///
-  /// In en, this message translates to:
-  /// **'Partial Rating (1–5)'**
-  String get meetingPartialRating;
-
-  /// Hint for meeting partial rating field
-  ///
-  /// In en, this message translates to:
-  /// **'Enter a rating between 1 and 5'**
-  String get meetingPartialRatingHint;
-
-  /// Validation error for meeting partial rating
-  ///
-  /// In en, this message translates to:
-  /// **'Rating must be a number between 1 and 5'**
-  String get meetingRatingInvalid;
-
   /// Snackbar shown after creating a meeting
   ///
   /// In en, this message translates to:
@@ -661,12 +643,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Meetings'**
   String get meetingScreenTitle;
-
-  /// Label showing partial rating of a meeting
-  ///
-  /// In en, this message translates to:
-  /// **'Rating: {rating}★'**
-  String partialRating(int rating);
 
   /// Button label to select a date
   ///
@@ -1302,7 +1278,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{value}/5'**
-  String yourRatingValue(int value);
+  String yourRatingValue(double value);
 
   /// Label shown before the user's existing rating comment
   ///
@@ -1344,7 +1320,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{value}/5'**
-  String ratingValue(int value);
+  String ratingValue(double value);
 
   /// Button/link to open the ratings screen
   ///
@@ -1470,7 +1446,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{value}/5'**
-  String personalBookRatingValue(int value);
+  String personalBookRatingValue(double value);
 
   /// Message shown when trying to rate a book that is not read
   ///
@@ -1897,6 +1873,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'End Date'**
   String get bookEndDate;
+
+  /// Title for the sticker picker bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Stickers'**
+  String get stickerPickerTitle;
+
+  /// Confirm button label in sticker picker
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get stickerPickerConfirm;
+
+  /// Tooltip for the sticker button in comment form and note field
+  ///
+  /// In en, this message translates to:
+  /// **'Add sticker'**
+  String get stickerButtonTooltip;
+
+  /// Message shown when the sticker limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Sticker limit reached (max {max})'**
+  String stickerLimitReached(int max);
+
+  /// Title for sticker gallery screen
+  ///
+  /// In en, this message translates to:
+  /// **'My Stickers'**
+  String get stickerGalleryTitle;
+
+  /// Button label to upload a new sticker
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Sticker'**
+  String get uploadStickerButton;
+
+  /// Empty state message when user has no stickers
+  ///
+  /// In en, this message translates to:
+  /// **'No stickers yet. Upload your first sticker!'**
+  String get noStickersMessage;
+
+  /// Confirmation dialog for deleting a sticker
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this sticker?'**
+  String get deleteStickerConfirm;
+
+  /// Snackbar shown after successfully uploading a sticker
+  ///
+  /// In en, this message translates to:
+  /// **'Sticker uploaded successfully'**
+  String get stickerUploadSuccess;
+
+  /// Snackbar shown when uploading a sticker fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error uploading sticker'**
+  String get stickerUploadError;
+
+  /// Snackbar shown after successfully deleting a sticker
+  ///
+  /// In en, this message translates to:
+  /// **'Sticker deleted'**
+  String get stickerDeleteSuccess;
+
+  /// Error message when image size exceeds limit
+  ///
+  /// In en, this message translates to:
+  /// **'Image must be less than 2MB'**
+  String get imageTooLarge;
+
+  /// Error message when image dimensions are invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Dimensions must be between 100×100 and 1024×1024'**
+  String get invalidImageDimensions;
+
+  /// Error message when image format is not supported
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid format. Use PNG, JPG or WebP'**
+  String get invalidImageFormat;
+
+  /// Message shown when user needs to sign in
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in'**
+  String get pleaseSignIn;
+
+  /// Menu item to edit a comment
+  ///
+  /// In en, this message translates to:
+  /// **'Edit comment'**
+  String get editComment;
+
+  /// Menu item to delete a comment
+  ///
+  /// In en, this message translates to:
+  /// **'Delete comment'**
+  String get deleteComment;
+
+  /// Confirmation dialog title for deleting a comment
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this comment?'**
+  String get deleteCommentConfirm;
+
+  /// Snackbar shown when deleting a comment fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error deleting comment. Please try again.'**
+  String get commentDeleteError;
+
+  /// Snackbar shown when editing a comment fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error editing comment. Please try again.'**
+  String get commentEditError;
 }
 
 class _AppLocalizationsDelegate

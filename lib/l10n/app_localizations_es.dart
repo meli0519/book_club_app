@@ -277,16 +277,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get meetingNotesHint => 'Ingresa las notas de la reunión';
 
   @override
-  String get meetingPartialRating => 'Calificación parcial (1–5)';
-
-  @override
-  String get meetingPartialRatingHint => 'Ingresa una calificación entre 1 y 5';
-
-  @override
-  String get meetingRatingInvalid =>
-      'La calificación debe ser un número entre 1 y 5';
-
-  @override
   String get meetingCreatedSuccess => 'Reunión creada exitosamente';
 
   @override
@@ -308,11 +298,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get meetingScreenTitle => 'Reuniones';
-
-  @override
-  String partialRating(int rating) {
-    return 'Calificación: $rating★';
-  }
 
   @override
   String get selectDate => 'Seleccionar fecha';
@@ -665,8 +650,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get yourRating => 'Tu calificación:';
 
   @override
-  String yourRatingValue(int value) {
-    return '$value/5';
+  String yourRatingValue(double value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString/5';
   }
 
   @override
@@ -689,8 +678,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get sortByName => 'Ordenar por nombre';
 
   @override
-  String ratingValue(int value) {
-    return '$value/5';
+  String ratingValue(double value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString/5';
   }
 
   @override
@@ -758,8 +751,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get personalBookRatingLabel => 'Tu calificación';
 
   @override
-  String personalBookRatingValue(int value) {
-    return '$value/5';
+  String personalBookRatingValue(double value) {
+    final intl.NumberFormat valueNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString/5';
   }
 
   @override
@@ -994,4 +991,70 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get bookEndDate => 'Fecha de fin';
+
+  @override
+  String get stickerPickerTitle => 'Stickers';
+
+  @override
+  String get stickerPickerConfirm => 'Confirmar';
+
+  @override
+  String get stickerButtonTooltip => 'Agregar sticker';
+
+  @override
+  String stickerLimitReached(int max) {
+    return 'Límite de stickers alcanzado (máx. $max)';
+  }
+
+  @override
+  String get stickerGalleryTitle => 'Mis Stickers';
+
+  @override
+  String get uploadStickerButton => 'Subir Sticker';
+
+  @override
+  String get noStickersMessage =>
+      'No tienes stickers. ¡Sube tu primer sticker!';
+
+  @override
+  String get deleteStickerConfirm => '¿Eliminar este sticker?';
+
+  @override
+  String get stickerUploadSuccess => 'Sticker subido exitosamente';
+
+  @override
+  String get stickerUploadError => 'Error al subir sticker';
+
+  @override
+  String get stickerDeleteSuccess => 'Sticker eliminado';
+
+  @override
+  String get imageTooLarge => 'La imagen debe ser menor a 2MB';
+
+  @override
+  String get invalidImageDimensions =>
+      'Las dimensiones deben estar entre 100×100 y 1024×1024';
+
+  @override
+  String get invalidImageFormat => 'Formato no válido. Usa PNG, JPG o WebP';
+
+  @override
+  String get pleaseSignIn => 'Por favor, inicia sesión';
+
+  @override
+  String get editComment => 'Editar comentario';
+
+  @override
+  String get deleteComment => 'Eliminar comentario';
+
+  @override
+  String get deleteCommentConfirm => '¿Eliminar este comentario?';
+
+  @override
+  String get commentDeleteError =>
+      'Error al eliminar el comentario. Por favor, inténtalo de nuevo.';
+
+  @override
+  String get commentEditError =>
+      'Error al editar el comentario. Por favor, inténtalo de nuevo.';
 }

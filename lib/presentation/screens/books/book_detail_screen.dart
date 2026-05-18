@@ -23,6 +23,8 @@ import '../../widgets/common/role_guard.dart';
 import '../../widgets/common/expandable_phrase_chip.dart';
 import '../../widgets/review/final_review_form.dart';
 import '../../widgets/comment/comment_form.dart';
+import '../../widgets/comment/comment_edit_dialog.dart';
+import '../../widgets/comment/sticker_display.dart';
 import '../../../domain/models/app_user.dart';
 import '../meetings/meeting_screen.dart';
 
@@ -442,8 +444,8 @@ class _MeetingTile extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
-        leading: CircleAvatar(
-          child: Text('${meeting.partialRating}★'),
+        leading: const CircleAvatar(
+          child: Icon(Icons.groups, size: 20),
         ),
         title: Text(dateFormat.format(meeting.date)),
         subtitle: meeting.notes.isNotEmpty
@@ -497,7 +499,11 @@ class _CommentsSection extends ConsumerWidget {
             }
             return Column(
               children: comments
-                  .map((c) => _CommentTile(comment: c))
+                  .map((c) => _CommentTile(
+                        comment: c,
+                        bookId: bookId,
+                        currentUserId: currentUser?.uid ?? '',
+                      ))
                   .toList(),
             );
           },
@@ -516,14 +522,72 @@ class _CommentsSection extends ConsumerWidget {
   }
 }
 
-class _CommentTile extends StatelessWidget {
-  final Comment comment;
+enum _CommentAction { edit, delete }
 
-  const _CommentTile({required this.comment});
+class _CommentTile extends ConsumerWidget {
+  final Comment comment;
+  final String bookId;
+  final String currentUserId;
+
+  const _CommentTile({
+    required this.comment,
+    required this.bookId,
+    required this.currentUserId,
+  });
+
+  Future<void> _confirmDelete(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context)!;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.deleteCommentConfirm),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: FilledButton.styleFrom(
+              backgroundColor: Theme.of(ctx).colorScheme.error,
+            ),
+            child: Text(l10n.delete),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !context.mounted) return;
+    try {
+      final service = ref.read(commentServiceProvider);
+      await service.deleteBookComment(bookId, comment.id);
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.commentDeleteError),
+          ),
+        );
+      }
+    }
+  }
+
+  void _openEditDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (_) => CommentEditDialog(
+        comment: comment,
+        parentId: bookId,
+        isBook: true,
+        currentUserId: currentUserId,
+      ),
+    );
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final dateFormat = DateFormat.yMMMd();
+    final isOwner = comment.authorId == currentUserId;
+
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       child: Padding(
@@ -556,10 +620,59 @@ class _CommentTile extends StatelessWidget {
                   dateFormat.format(comment.createdAt),
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
+                if (isOwner) ...[
+                  const SizedBox(width: 4),
+                  PopupMenuButton<_CommentAction>(
+                    iconSize: 18,
+                    padding: EdgeInsets.zero,
+                    onSelected: (action) {
+                      if (action == _CommentAction.edit) {
+                        _openEditDialog(context);
+                      } else {
+                        _confirmDelete(context, ref);
+                      }
+                    },
+                    itemBuilder: (ctx) => [
+                      PopupMenuItem(
+                        value: _CommentAction.edit,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.edit, size: 18),
+                            const SizedBox(width: 8),
+                            Text(AppLocalizations.of(ctx)!.editComment),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: _CommentAction.delete,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.delete,
+                              size: 18,
+                              color: Theme.of(ctx).colorScheme.error,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              AppLocalizations.of(ctx)!.deleteComment,
+                              style: TextStyle(
+                                color: Theme.of(ctx).colorScheme.error,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ],
             ),
             const SizedBox(height: 8),
             Text(comment.text),
+            if (comment.stickers.isNotEmpty) ...[
+              const SizedBox(height: 6),
+              StickerDisplay(stickers: comment.stickers),
+            ],
           ],
         ),
       ),

@@ -134,7 +134,10 @@ class _PersonalReviewFormState extends ConsumerState<PersonalReviewForm> {
 
     // If review already exists, show read-only summary
     if (widget.book.review != null) {
-      return _ReviewSummary(review: widget.book.review!);
+      return _ReviewSummary(
+        review: widget.book.review!,
+        questionIds: widget.book.reviewQuestionIds,
+      );
     }
 
     // Show editable form
@@ -297,15 +300,20 @@ class _PersonalReviewFormState extends ConsumerState<PersonalReviewForm> {
 }
 
 /// Read-only summary shown after the review is submitted.
-class _ReviewSummary extends StatelessWidget {
+class _ReviewSummary extends ConsumerWidget {
   final PersonalBookReview review;
+  final List<String> questionIds;
 
-  const _ReviewSummary({required this.review});
+  const _ReviewSummary({
+    required this.review,
+    required this.questionIds,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
+    final questionsAsync = ref.watch(allReviewQuestionsStreamProvider);
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -336,16 +344,14 @@ class _ReviewSummary extends StatelessWidget {
                   style: theme.textTheme.labelMedium
                       ?.copyWith(fontWeight: FontWeight.bold)),
               const SizedBox(height: 6),
-              Wrap(
-                spacing: 6,
-                runSpacing: 4,
-                children: review.favoritePhrases
-                    .map((p) => ExpandablePhraseChip(
-                          phrase: p,
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                        ))
-                    .toList(),
+              ...review.favoritePhrases.map(
+                (p) => Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: ExpandablePhraseChip(
+                    phrase: p,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
               ),
               const SizedBox(height: 12),
             ],
@@ -365,55 +371,54 @@ class _ReviewSummary extends StatelessWidget {
               const SizedBox(height: 12),
             ],
 
-            // Selected questions
-            if (review.selectedQuestionIds.isNotEmpty) ...[
-              Text(
-                l10n.selectedQuestions,
-                style: theme.textTheme.labelMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 6),
-              Wrap(
-                spacing: 6,
-                runSpacing: 4,
-                children: review.selectedQuestionIds
-                    .map((id) => Chip(
-                          label: Text('Question $id'),
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                        ))
-                    .toList(),
-              ),
-              const SizedBox(height: 12),
-            ],
+            // Question answers with actual question text
+            if (review.questionAnswers.isNotEmpty)
+              questionsAsync.when(
+                loading: () => const SizedBox.shrink(),
+                error: (_, __) => const SizedBox.shrink(),
+                data: (allQuestions) {
+                  // Build a lookup map: id -> question text
+                  final questionMap = {
+                    for (final q in allQuestions) q.id: q.question,
+                  };
 
-            // Question answers
-            if (review.questionAnswers.isNotEmpty) ...[
-              Text(
-                l10n.questionAnswers,
-                style: theme.textTheme.labelMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                  // Show only the questions that belong to this review, in order
+                  final answeredQuestions = questionIds
+                      .where((id) =>
+                          review.questionAnswers.containsKey(id) &&
+                          (review.questionAnswers[id]?.isNotEmpty ?? false))
+                      .toList();
+
+                  if (answeredQuestions.isEmpty) return const SizedBox.shrink();
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: answeredQuestions.map((id) {
+                      final questionText = questionMap[id] ?? id;
+                      final answer = review.questionAnswers[id]!;
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              questionText,
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              answer,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  );
+                },
               ),
-              const SizedBox(height: 6),
-              ...review.questionAnswers.entries.map((entry) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Q: ${entry.key}',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      entry.value,
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              )),
-            ],
           ],
         ),
       ),

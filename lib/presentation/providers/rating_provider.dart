@@ -24,7 +24,7 @@ final meetingAverageRatingProvider =
 /// Provider for the current user's rating on a book.
 /// Family param: (bookId, userId) encoded as "$bookId|$userId"
 final userBookRatingProvider =
-    FutureProvider.family<int?, String>((ref, key) {
+    FutureProvider.family<double?, String>((ref, key) {
   final parts = key.split('|');
   final bookId = parts[0];
   final userId = parts[1];
@@ -35,7 +35,7 @@ final userBookRatingProvider =
 /// Provider for the current user's rating on a meeting.
 /// Family param: (meetingId, userId) encoded as "$meetingId|$userId"
 final userMeetingRatingProvider =
-    FutureProvider.family<int?, String>((ref, key) {
+    FutureProvider.family<double?, String>((ref, key) {
   final parts = key.split('|');
   final meetingId = parts[0];
   final userId = parts[1];

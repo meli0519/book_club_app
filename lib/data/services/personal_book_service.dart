@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../domain/models/personal_book.dart';
+import '../../domain/models/personal_note.dart';
 
 /// Service for managing a user's private personal book collection.
 ///
@@ -192,6 +193,77 @@ class PersonalBookService {
       throw Exception('Error updating personal book: ${e.message}');
     } catch (e) {
       throw Exception('Unexpected error updating personal book: $e');
+    }
+  }
+
+  /// Adds a new [PersonalNote] to the notes list of [bookId] for [uid].
+  Future<void> addNote(String uid, String bookId, PersonalNote note) async {
+    try {
+      await _personalBooksRef(uid).doc(bookId).update({
+        'notes': FieldValue.arrayUnion([note.toMap()]),
+        'updatedAt': Timestamp.now(),
+      });
+    } on FirebaseException catch (e) {
+      throw Exception('Error adding note: ${e.message}');
+    } catch (e) {
+      throw Exception('Unexpected error adding note: $e');
+    }
+  }
+
+  /// Removes a [PersonalNote] from the notes list of [bookId] for [uid].
+  Future<void> removeNote(String uid, String bookId, PersonalNote note) async {
+    try {
+      await _personalBooksRef(uid).doc(bookId).update({
+        'notes': FieldValue.arrayRemove([note.toMap()]),
+        'updatedAt': Timestamp.now(),
+      });
+    } on FirebaseException catch (e) {
+      throw Exception('Error removing note: ${e.message}');
+    } catch (e) {
+      throw Exception('Unexpected error removing note: $e');
+    }
+  }
+
+  /// Replaces [oldNote] with [newNote] in the notes list of [bookId] for [uid].
+  ///
+  /// Uses a Firestore transaction to ensure atomicity: reads the current notes
+  /// array, swaps the matching entry, and writes it back.
+  Future<void> updateNote(
+    String uid,
+    String bookId,
+    PersonalNote oldNote,
+    PersonalNote newNote,
+  ) async {
+    try {
+      final docRef = _personalBooksRef(uid).doc(bookId);
+      await _firestore.runTransaction((tx) async {
+        final snapshot = await tx.get(docRef);
+        if (!snapshot.exists) return;
+
+        final rawNotes = snapshot.data()?['notes'] as List<dynamic>? ?? [];
+        final oldMap = oldNote.toMap();
+
+        // Find the index of the note to replace by matching all fields.
+        final index = rawNotes.indexWhere((n) {
+          final m = Map<String, dynamic>.from(n as Map);
+          return m['text'] == oldMap['text'] &&
+              m['createdAt'] == oldMap['createdAt'];
+        });
+
+        if (index == -1) return; // Note not found — nothing to update.
+
+        final updatedNotes = List<dynamic>.from(rawNotes);
+        updatedNotes[index] = newNote.toMap();
+
+        tx.update(docRef, {
+          'notes': updatedNotes,
+          'updatedAt': Timestamp.now(),
+        });
+      });
+    } on FirebaseException catch (e) {
+      throw Exception('Error updating note: ${e.message}');
+    } catch (e) {
+      throw Exception('Unexpected error updating note: $e');
     }
   }
 

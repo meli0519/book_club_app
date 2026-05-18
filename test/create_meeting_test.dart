@@ -18,12 +18,6 @@ String? validateDate(DateTime? date) {
   return null;
 }
 
-/// Returns an error string when [rating] is outside 1–5, null otherwise.
-String? validatePartialRating(int rating) {
-  if (rating < 1 || rating > 5) return 'Rating must be between 1 and 5';
-  return null;
-}
-
 /// Returns an error string when [bookId] is empty/null, null otherwise.
 String? validateBookId(String? bookId) {
   if (bookId == null || bookId.trim().isEmpty) return 'This field is required';
@@ -33,12 +27,9 @@ String? validateBookId(String? bookId) {
 /// Simulates the full form validation before saving.
 bool isFormValid({
   required DateTime? date,
-  required int partialRating,
   required String? bookId,
 }) {
-  return validateDate(date) == null &&
-      validatePartialRating(partialRating) == null &&
-      validateBookId(bookId) == null;
+  return validateDate(date) == null && validateBookId(bookId) == null;
 }
 
 // ---------------------------------------------------------------------------
@@ -50,7 +41,6 @@ Future<String> _saveMeeting(
   required String bookId,
   required DateTime date,
   required String notes,
-  required int partialRating,
   required String createdBy,
 }) async {
   final docRef = fakeFirestore.collection('meetings').doc();
@@ -58,7 +48,6 @@ Future<String> _saveMeeting(
     'bookId': bookId,
     'date': Timestamp.fromDate(date),
     'notes': notes,
-    'partialRating': partialRating,
     'createdBy': createdBy,
     'createdAt': Timestamp.fromDate(DateTime.now()),
   });
@@ -92,36 +81,6 @@ void main() {
   });
 
   // -------------------------------------------------------------------------
-  // Form validation – partialRating field (Requirement 6.2)
-  // -------------------------------------------------------------------------
-  group('Form validation – partialRating field', () {
-    test('rating 0 (unselected) is rejected', () {
-      expect(validatePartialRating(0), isNotNull);
-    });
-
-    test('rating below 1 is rejected', () {
-      for (final r in [-5, -1, 0]) {
-        expect(validatePartialRating(r), isNotNull,
-            reason: 'rating $r should be invalid');
-      }
-    });
-
-    test('rating above 5 is rejected', () {
-      for (final r in [6, 10, 100]) {
-        expect(validatePartialRating(r), isNotNull,
-            reason: 'rating $r should be invalid');
-      }
-    });
-
-    test('ratings 1–5 are all accepted', () {
-      for (final r in [1, 2, 3, 4, 5]) {
-        expect(validatePartialRating(r), isNull,
-            reason: 'rating $r should be valid');
-      }
-    });
-  });
-
-  // -------------------------------------------------------------------------
   // Form validation – bookId field
   // -------------------------------------------------------------------------
   group('Form validation – bookId field', () {
@@ -148,51 +107,23 @@ void main() {
   group('Combined form validation', () {
     test('form is invalid when date is missing', () {
       expect(
-        isFormValid(date: null, partialRating: 3, bookId: 'book_1'),
-        isFalse,
-      );
-    });
-
-    test('form is invalid when partialRating is 0', () {
-      expect(
-        isFormValid(
-            date: DateTime(2024, 1, 1), partialRating: 0, bookId: 'book_1'),
+        isFormValid(date: null, bookId: 'book_1'),
         isFalse,
       );
     });
 
     test('form is invalid when bookId is empty', () {
       expect(
-        isFormValid(
-            date: DateTime(2024, 1, 1), partialRating: 3, bookId: ''),
-        isFalse,
-      );
-    });
-
-    test('form is invalid when both date and rating are missing', () {
-      expect(
-        isFormValid(date: null, partialRating: 0, bookId: 'book_1'),
+        isFormValid(date: DateTime(2024, 1, 1), bookId: ''),
         isFalse,
       );
     });
 
     test('form is valid when all required fields are present', () {
       expect(
-        isFormValid(
-            date: DateTime(2024, 6, 15), partialRating: 4, bookId: 'book_1'),
+        isFormValid(date: DateTime(2024, 6, 15), bookId: 'book_1'),
         isTrue,
       );
-    });
-
-    test('form is valid for all valid ratings 1–5', () {
-      for (final r in [1, 2, 3, 4, 5]) {
-        expect(
-          isFormValid(
-              date: DateTime(2024, 1, 1), partialRating: r, bookId: 'book_x'),
-          isTrue,
-          reason: 'rating $r should produce a valid form',
-        );
-      }
     });
   });
 
@@ -209,7 +140,6 @@ void main() {
         bookId: 'book_abc',
         date: date,
         notes: 'Great discussion',
-        partialRating: 4,
         createdBy: 'user_leader',
       );
 
@@ -221,7 +151,6 @@ void main() {
       expect(data.containsKey('bookId'), isTrue);
       expect(data.containsKey('date'), isTrue);
       expect(data.containsKey('notes'), isTrue);
-      expect(data.containsKey('partialRating'), isTrue);
       expect(data.containsKey('createdBy'), isTrue);
       expect(data.containsKey('createdAt'), isTrue);
     });
@@ -235,7 +164,6 @@ void main() {
         bookId: 'book_xyz',
         date: date,
         notes: 'Chapter 5 discussion',
-        partialRating: 5,
         createdBy: 'leader_001',
       );
 
@@ -245,7 +173,6 @@ void main() {
 
       expect(data['bookId'], equals('book_xyz'));
       expect(data['notes'], equals('Chapter 5 discussion'));
-      expect(data['partialRating'], equals(5));
       expect(data['createdBy'], equals('leader_001'));
       expect(data['date'], isA<Timestamp>());
       expect(data['createdAt'], isA<Timestamp>());
@@ -260,7 +187,6 @@ void main() {
         bookId: 'book_1',
         date: date,
         notes: '',
-        partialRating: 3,
         createdBy: 'user_1',
       );
 
@@ -281,7 +207,6 @@ void main() {
       // Simulate: form validation fails → no write
       final valid = isFormValid(
         date: null,
-        partialRating: 3,
         bookId: 'book_1',
       );
 
@@ -291,32 +216,6 @@ void main() {
           bookId: 'book_1',
           date: DateTime.now(),
           notes: '',
-          partialRating: 3,
-          createdBy: 'user_1',
-        );
-      }
-
-      final snapshot = await fakeFirestore.collection('meetings').get();
-      expect(snapshot.docs.length, equals(0));
-    });
-
-    test('no document is created when form is invalid (missing rating)',
-        () async {
-      final fakeFirestore = FakeFirebaseFirestore();
-
-      final valid = isFormValid(
-        date: DateTime(2024, 1, 1),
-        partialRating: 0,
-        bookId: 'book_1',
-      );
-
-      if (valid) {
-        await _saveMeeting(
-          fakeFirestore,
-          bookId: 'book_1',
-          date: DateTime.now(),
-          notes: '',
-          partialRating: 0,
           createdBy: 'user_1',
         );
       }
@@ -339,7 +238,6 @@ void main() {
         bookId: 'book_test',
         date: date,
         notes: 'Test notes',
-        partialRating: 2,
         createdBy: 'user_test',
       );
 
@@ -350,7 +248,6 @@ void main() {
       expect(meeting.id, equals(meetingId));
       expect(meeting.bookId, equals('book_test'));
       expect(meeting.notes, equals('Test notes'));
-      expect(meeting.partialRating, equals(2));
       expect(meeting.createdBy, equals('user_test'));
       expect(meeting.date.year, equals(2024));
       expect(meeting.date.month, equals(5));
@@ -366,7 +263,6 @@ void main() {
         bookId: 'book_1',
         date: date,
         notes: 'Independence Day meeting',
-        partialRating: 5,
         createdBy: 'leader_1',
         createdAt: createdAt,
       );
@@ -375,7 +271,6 @@ void main() {
 
       expect(map['bookId'], equals('book_1'));
       expect(map['notes'], equals('Independence Day meeting'));
-      expect(map['partialRating'], equals(5));
       expect(map['createdBy'], equals('leader_1'));
       expect(map['date'], isA<Timestamp>());
       expect(map['createdAt'], isA<Timestamp>());
@@ -388,8 +283,7 @@ void main() {
   group('Error handling', () {
     test('meeting with empty notes is still valid (notes are optional)', () {
       expect(
-        isFormValid(
-            date: DateTime(2024, 1, 1), partialRating: 3, bookId: 'book_1'),
+        isFormValid(date: DateTime(2024, 1, 1), bookId: 'book_1'),
         isTrue,
         reason: 'notes are optional, empty notes should not block submission',
       );
@@ -404,7 +298,6 @@ void main() {
         bookId: 'book_1',
         date: DateTime(2024, 1, 1),
         notes: longNotes,
-        partialRating: 3,
         createdBy: 'user_1',
       );
 

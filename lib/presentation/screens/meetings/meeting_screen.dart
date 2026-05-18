@@ -6,9 +6,9 @@ import 'package:intl/intl.dart';
 import '../../../domain/models/app_user.dart';
 import '../../../domain/models/meeting.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/meeting_provider.dart';
 import '../../providers/rating_provider.dart';
-import '../../providers/auth_provider.dart';
 import '../../routes/app_router.dart';
 import '../../widgets/common/role_guard.dart';
 import '../../widgets/rating/average_rating_display.dart';
@@ -147,24 +147,6 @@ class _MeetingCard extends ConsumerWidget {
                         .textTheme
                         .titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                // Rating badge
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    l10n.partialRating(meeting.partialRating),
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
-                        ),
                   ),
                 ),
                 // Leader-only actions

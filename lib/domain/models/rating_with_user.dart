@@ -5,7 +5,7 @@ class RatingWithUser {
   final String authorName;
   final String authorPhotoUrl;
   final String authorEmail;
-  final int value; // 1-5
+  final double value; // 0.5–5.0 in 0.5 increments
   final String? comment;
 
   const RatingWithUser({

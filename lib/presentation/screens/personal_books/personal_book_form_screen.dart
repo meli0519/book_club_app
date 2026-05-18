@@ -199,7 +199,7 @@ class _PersonalBookFormScreenState extends ConsumerState<PersonalBookFormScreen>
           : _descriptionController.text.trim(),
       coverUrl: null,
       status: _status,
-      notes: null,
+      notes: const [],
       rating: null,
       reviewQuestionIds: _selectedQuestionIds,
       createdAt: now,

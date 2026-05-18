@@ -23,6 +23,7 @@ import '../screens/library/library_screen.dart';
 import '../screens/personal_books/personal_book_form_screen.dart';
 import '../screens/personal_books/personal_books_screen.dart';
 import '../screens/personal_books/personal_book_detail_screen.dart';
+import '../screens/stickers/sticker_management_screen.dart';
 import '../../domain/models/book.dart';
 import '../../domain/models/meeting.dart';
 
@@ -50,6 +51,7 @@ class AppRoutes {
   static const createPersonalBook = '/personal-books/create';
   static const personalBookDetailPath = '/personal-books/:id';
   static const editPersonalBookPath = '/personal-books/:id/edit';
+  static const stickerManage = '/stickers/manage';
 
   /// Returns the path for a specific book's meetings screen.
   static String bookMeetings(String bookId) => '/books/$bookId/meetings';
@@ -151,6 +153,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           if (state.matchedLocation.startsWith(AppRoutes.profile)) return null;
           if (state.matchedLocation == AppRoutes.library) return null;
           if (state.matchedLocation.startsWith(AppRoutes.personalBooks)) return null;
+          if (state.matchedLocation.startsWith('/stickers')) return null;
           return AppRoutes.home;
 
         case MembershipStatus.pending:
@@ -297,6 +300,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           final bookId = state.pathParameters['id']!;
           return PersonalBookDetailScreen(bookId: bookId);
         },
+      ),
+      GoRoute(
+        path: AppRoutes.stickerManage,
+        builder: (context, state) => const StickerManagementScreen(),
       ),
     ],
   );

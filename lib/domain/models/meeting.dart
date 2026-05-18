@@ -5,7 +5,6 @@ class Meeting {
   final String bookId;
   final DateTime date;
   final String notes;
-  final int partialRating; // 1-5
   final String createdBy;
   final DateTime createdAt;
 
@@ -14,7 +13,6 @@ class Meeting {
     required this.bookId,
     required this.date,
     required this.notes,
-    required this.partialRating,
     required this.createdBy,
     required this.createdAt,
   });
@@ -25,7 +23,6 @@ class Meeting {
       bookId: map['bookId'] as String,
       date: (map['date'] as Timestamp).toDate(),
       notes: map['notes'] as String,
-      partialRating: map['partialRating'] as int,
       createdBy: map['createdBy'] as String,
       createdAt: (map['createdAt'] as Timestamp).toDate(),
     );
@@ -36,7 +33,6 @@ class Meeting {
       'bookId': bookId,
       'date': Timestamp.fromDate(date),
       'notes': notes,
-      'partialRating': partialRating,
       'createdBy': createdBy,
       'createdAt': Timestamp.fromDate(createdAt),
     };

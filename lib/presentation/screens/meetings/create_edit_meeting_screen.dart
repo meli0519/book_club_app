@@ -9,7 +9,6 @@ import '../../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/book_provider.dart';
 import '../../providers/meeting_provider.dart';
-import '../../widgets/rating/star_rating_selector.dart';
 
 /// Form screen for creating or editing a [Meeting].
 ///
@@ -42,11 +41,9 @@ class _CreateEditMeetingScreenState
   final _notesController = TextEditingController();
 
   DateTime? _selectedDate;
-  int _partialRating = 0; // 0 = not selected
   String? _selectedBookId;
   bool _isSaving = false;
   bool _showDateError = false;
-  bool _showRatingError = false;
 
   bool get _isEditMode => widget.meeting != null;
 
@@ -57,7 +54,6 @@ class _CreateEditMeetingScreenState
     if (_isEditMode) {
       _selectedDate = widget.meeting!.date;
       _notesController.text = widget.meeting!.notes;
-      _partialRating = widget.meeting!.partialRating;
     }
   }
 
@@ -84,16 +80,13 @@ class _CreateEditMeetingScreenState
   }
 
   Future<void> _submit() async {
-    // Validate date and rating before form validation
+    // Validate date before form validation
     setState(() {
       _showDateError = _selectedDate == null;
-      _showRatingError = _partialRating < 1 || _partialRating > 5;
     });
 
     if (!_formKey.currentState!.validate()) return;
-    if (_selectedDate == null || _partialRating < 1 || _partialRating > 5) {
-      return;
-    }
+    if (_selectedDate == null) return;
     if (_selectedBookId == null || _selectedBookId!.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -115,9 +108,6 @@ class _CreateEditMeetingScreenState
         if (_notesController.text.trim() != widget.meeting!.notes) {
           changedFields['notes'] = _notesController.text.trim();
         }
-        if (_partialRating != widget.meeting!.partialRating) {
-          changedFields['partialRating'] = _partialRating;
-        }
         if (changedFields.isNotEmpty) {
           await service.updateMeeting(widget.meeting!.id, changedFields);
         }
@@ -136,7 +126,6 @@ class _CreateEditMeetingScreenState
           bookId: _selectedBookId!,
           date: _selectedDate!,
           notes: _notesController.text.trim(),
-          partialRating: _partialRating,
           createdBy: currentUser?.uid ?? '',
           createdAt: DateTime.now(),
         );
@@ -239,33 +228,6 @@ class _CreateEditMeetingScreenState
                         return null;
                       },
                     ),
-                    const SizedBox(height: 16),
-
-                    // Partial rating (star selector 1-5)
-                    Text(
-                      l10n.meetingPartialRating,
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    const SizedBox(height: 8),
-                    StarRatingSelectorWidget(
-                      currentRating: _partialRating,
-                      onRatingSelected: (value) => setState(() {
-                        _partialRating = value;
-                        _showRatingError = false;
-                      }),
-                    ),
-                    if (_showRatingError &&
-                        (_partialRating < 1 || _partialRating > 5))
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4, left: 12),
-                        child: Text(
-                          l10n.meetingRatingInvalid,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
                     const SizedBox(height: 32),
 
                     ElevatedButton(

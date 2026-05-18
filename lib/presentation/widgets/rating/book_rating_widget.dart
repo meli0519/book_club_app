@@ -28,7 +28,7 @@ class BookRatingWidget extends ConsumerStatefulWidget {
 class _BookRatingWidgetState extends ConsumerState<BookRatingWidget> {
   bool _isSubmitting = false;
 
-  Future<void> _handleRatingSelected(int value) async {
+  Future<void> _handleRatingSelected(double value) async {
     setState(() => _isSubmitting = true);
     try {
       final service = ref.read(ratingServiceProvider);
@@ -92,7 +92,7 @@ class _BookRatingWidgetState extends ConsumerState<BookRatingWidget> {
               )
             else
               StarRatingSelectorWidget(
-                currentRating: currentRating ?? 0,
+                currentRating: currentRating ?? 0.0,
                 onRatingSelected: _handleRatingSelected,
               ),
           ],

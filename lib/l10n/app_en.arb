@@ -258,15 +258,6 @@
   "meetingNotesHint": "Enter meeting notes",
   "@meetingNotesHint": { "description": "Hint for meeting notes field" },
 
-  "meetingPartialRating": "Partial Rating (1–5)",
-  "@meetingPartialRating": { "description": "Label for meeting partial rating field" },
-
-  "meetingPartialRatingHint": "Enter a rating between 1 and 5",
-  "@meetingPartialRatingHint": { "description": "Hint for meeting partial rating field" },
-
-  "meetingRatingInvalid": "Rating must be a number between 1 and 5",
-  "@meetingRatingInvalid": { "description": "Validation error for meeting partial rating" },
-
   "meetingCreatedSuccess": "Meeting created successfully",
   "@meetingCreatedSuccess": { "description": "Snackbar shown after creating a meeting" },
 
@@ -287,12 +278,6 @@
 
   "meetingScreenTitle": "Meetings",
   "@meetingScreenTitle": { "description": "Title for meeting screen" },
-
-  "partialRating": "Rating: {rating}★",
-  "@partialRating": {
-    "description": "Label showing partial rating of a meeting",
-    "placeholders": { "rating": { "type": "int" } }
-  },
 
   "selectDate": "Select Date",
   "@selectDate": { "description": "Button label to select a date" },
@@ -624,7 +609,7 @@
   "yourRatingValue": "{value}/5",
   "@yourRatingValue": {
     "description": "Shows the numeric value of the user's rating",
-    "placeholders": { "value": { "type": "int" } }
+    "placeholders": { "value": { "type": "double", "format": "decimalPattern" } }
   },
 
   "yourRatingComment": "Your comment:",
@@ -648,7 +633,7 @@
   "ratingValue": "{value}/5",
   "@ratingValue": {
     "description": "Shows the numeric value of a rating",
-    "placeholders": { "value": { "type": "int" } }
+    "placeholders": { "value": { "type": "double", "format": "decimalPattern" } }
   },
 
   "viewAllRatings": "View all ratings",
@@ -714,7 +699,7 @@
   "personalBookRatingValue": "{value}/5",
   "@personalBookRatingValue": {
     "description": "Shows the numeric value of the rating",
-    "placeholders": { "value": { "type": "int" } }
+    "placeholders": { "value": { "type": "double", "format": "decimalPattern" } }
   },
 
   "personalBookRatingOnlyForRead": "You can only rate books that have been marked as read",
@@ -931,5 +916,68 @@
   "@bookStartDate": { "description": "Label for book start date field" },
 
   "bookEndDate": "End Date",
-  "@bookEndDate": { "description": "Label for book end date field" }
+  "@bookEndDate": { "description": "Label for book end date field" },
+
+  "stickerPickerTitle": "Stickers",
+  "@stickerPickerTitle": { "description": "Title for the sticker picker bottom sheet" },
+
+  "stickerPickerConfirm": "Confirm",
+  "@stickerPickerConfirm": { "description": "Confirm button label in sticker picker" },
+
+  "stickerButtonTooltip": "Add sticker",
+  "@stickerButtonTooltip": { "description": "Tooltip for the sticker button in comment form and note field" },
+
+  "stickerLimitReached": "Sticker limit reached (max {max})",
+  "@stickerLimitReached": {
+    "description": "Message shown when the sticker limit is reached",
+    "placeholders": { "max": { "type": "int" } }
+  },
+
+  "stickerGalleryTitle": "My Stickers",
+  "@stickerGalleryTitle": { "description": "Title for sticker gallery screen" },
+
+  "uploadStickerButton": "Upload Sticker",
+  "@uploadStickerButton": { "description": "Button label to upload a new sticker" },
+
+  "noStickersMessage": "No stickers yet. Upload your first sticker!",
+  "@noStickersMessage": { "description": "Empty state message when user has no stickers" },
+
+  "deleteStickerConfirm": "Delete this sticker?",
+  "@deleteStickerConfirm": { "description": "Confirmation dialog for deleting a sticker" },
+
+  "stickerUploadSuccess": "Sticker uploaded successfully",
+  "@stickerUploadSuccess": { "description": "Snackbar shown after successfully uploading a sticker" },
+
+  "stickerUploadError": "Error uploading sticker",
+  "@stickerUploadError": { "description": "Snackbar shown when uploading a sticker fails" },
+
+  "stickerDeleteSuccess": "Sticker deleted",
+  "@stickerDeleteSuccess": { "description": "Snackbar shown after successfully deleting a sticker" },
+
+  "imageTooLarge": "Image must be less than 2MB",
+  "@imageTooLarge": { "description": "Error message when image size exceeds limit" },
+
+  "invalidImageDimensions": "Dimensions must be between 100×100 and 1024×1024",
+  "@invalidImageDimensions": { "description": "Error message when image dimensions are invalid" },
+
+  "invalidImageFormat": "Invalid format. Use PNG, JPG or WebP",
+  "@invalidImageFormat": { "description": "Error message when image format is not supported" },
+
+  "pleaseSignIn": "Please sign in",
+  "@pleaseSignIn": { "description": "Message shown when user needs to sign in" },
+
+  "editComment": "Edit comment",
+  "@editComment": { "description": "Menu item to edit a comment" },
+
+  "deleteComment": "Delete comment",
+  "@deleteComment": { "description": "Menu item to delete a comment" },
+
+  "deleteCommentConfirm": "Delete this comment?",
+  "@deleteCommentConfirm": { "description": "Confirmation dialog title for deleting a comment" },
+
+  "commentDeleteError": "Error deleting comment. Please try again.",
+  "@commentDeleteError": { "description": "Snackbar shown when deleting a comment fails" },
+
+  "commentEditError": "Error editing comment. Please try again.",
+  "@commentEditError": { "description": "Snackbar shown when editing a comment fails" }
 }

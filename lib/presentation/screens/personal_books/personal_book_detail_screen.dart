@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../domain/models/personal_book.dart';
 import '../../../domain/models/personal_book_review.dart';
+import '../../../domain/models/personal_note.dart';
 import '../../providers/personal_book_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../routes/app_router.dart';
@@ -53,9 +54,14 @@ class PersonalBookDetailScreen extends ConsumerWidget {
           if (book == null) {
             return _BookNotFound(l10n: l10n);
           }
+          final authState = ref.watch(authStateProvider).valueOrNull;
           return _BookDetailContent(
             book: book,
-            onNoteSaved: (notes) => _saveNote(context, ref, notes),
+            userId: authState?.uid ?? '',
+            onNoteAdded: (note) => _saveNote(context, ref, note),
+            onNoteDeleted: (note) => _deleteNote(context, ref, note),
+            onNoteUpdated: (oldNote, newNote) =>
+                _updateNote(context, ref, oldNote, newNote),
             onRatingChanged: (rating) => _saveRating(context, ref, rating),
             onReviewSubmitted: (review) => _saveReview(context, ref, review),
           );
@@ -130,7 +136,7 @@ class PersonalBookDetailScreen extends ConsumerWidget {
   Future<void> _saveNote(
     BuildContext context,
     WidgetRef ref,
-    String notes,
+    PersonalNote note,
   ) async {
     final l10n = AppLocalizations.of(context)!;
     final personalBookService = ref.read(personalBookServiceProvider);
@@ -139,11 +145,7 @@ class PersonalBookDetailScreen extends ConsumerWidget {
     if (authState == null) return;
 
     try {
-      await personalBookService.updatePersonalBook(
-        authState.uid,
-        bookId,
-        {'notes': notes},
-      );
+      await personalBookService.addNote(authState.uid, bookId, note);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.personalBookUpdatedSuccess)),
@@ -158,10 +160,59 @@ class PersonalBookDetailScreen extends ConsumerWidget {
     }
   }
 
+  Future<void> _deleteNote(
+    BuildContext context,
+    WidgetRef ref,
+    PersonalNote note,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    final personalBookService = ref.read(personalBookServiceProvider);
+    final authState = ref.read(authStateProvider).valueOrNull;
+
+    if (authState == null) return;
+
+    try {
+      await personalBookService.removeNote(authState.uid, bookId, note);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.personalBookSaveError)),
+        );
+      }
+    }
+  }
+
+  Future<void> _updateNote(
+    BuildContext context,
+    WidgetRef ref,
+    PersonalNote oldNote,
+    PersonalNote newNote,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    final personalBookService = ref.read(personalBookServiceProvider);
+    final authState = ref.read(authStateProvider).valueOrNull;
+
+    if (authState == null) return;
+
+    try {
+      await personalBookService.updateNote(
+        authState.uid,
+        bookId,
+        oldNote,
+        newNote,
+      );
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.commentEditError)),
+        );
+      }
+    }
+  }
   Future<void> _saveRating(
     BuildContext context,
     WidgetRef ref,
-    int rating,
+    double rating,
   ) async {
     final l10n = AppLocalizations.of(context)!;
     final personalBookService = ref.read(personalBookServiceProvider);
@@ -222,41 +273,24 @@ class PersonalBookDetailScreen extends ConsumerWidget {
 }
 
 /// Widget that displays the complete content of a personal book.
-class _BookDetailContent extends StatefulWidget {
+class _BookDetailContent extends StatelessWidget {
   final PersonalBook book;
-  final ValueChanged<String> onNoteSaved;
-  final ValueChanged<int> onRatingChanged;
+  final String userId;
+  final Future<void> Function(PersonalNote note) onNoteAdded;
+  final Future<void> Function(PersonalNote note) onNoteDeleted;
+  final Future<void> Function(PersonalNote oldNote, PersonalNote newNote) onNoteUpdated;
+  final ValueChanged<double> onRatingChanged;
   final Future<void> Function(PersonalBookReview review) onReviewSubmitted;
 
   const _BookDetailContent({
     required this.book,
-    required this.onNoteSaved,
+    required this.userId,
+    required this.onNoteAdded,
+    required this.onNoteDeleted,
+    required this.onNoteUpdated,
     required this.onRatingChanged,
     required this.onReviewSubmitted,
   });
-
-  @override
-  State<_BookDetailContent> createState() => _BookDetailContentState();
-}
-
-class _BookDetailContentState extends State<_BookDetailContent> {
-  late final TextEditingController _notesController;
-
-  @override
-  void initState() {
-    super.initState();
-    _notesController = TextEditingController(text: widget.book.notes);
-  }
-
-  @override
-  void dispose() {
-    _notesController.dispose();
-    super.dispose();
-  }
-
-  void _saveNotes() {
-    widget.onNoteSaved(_notesController.text);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -269,17 +303,17 @@ class _BookDetailContentState extends State<_BookDetailContent> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Cover image
-          _BookCover(coverUrl: widget.book.coverUrl),
+          _BookCover(coverUrl: book.coverUrl),
           const SizedBox(height: 16),
 
           // Title and author
           Text(
-            widget.book.title,
+            book.title,
             style: theme.textTheme.headlineSmall,
           ),
           const SizedBox(height: 4),
           Text(
-            widget.book.author,
+            book.author,
             style: theme.textTheme.titleMedium?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),
@@ -287,46 +321,46 @@ class _BookDetailContentState extends State<_BookDetailContent> {
           const SizedBox(height: 12),
 
           // Status chip
-          PersonalBookStatusChip(status: widget.book.status),
+          PersonalBookStatusChip(status: book.status),
           const SizedBox(height: 16),
 
           // Description (if available)
-          if (widget.book.description != null && widget.book.description!.isNotEmpty) ...[
+          if (book.description != null && book.description!.isNotEmpty) ...[
             Text(
               l10n.personalBookDescriptionLabel,
               style: theme.textTheme.titleSmall,
             ),
             const SizedBox(height: 4),
             Text(
-              widget.book.description!,
+              book.description!,
               style: theme.textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
           ],
 
           // Started at (if available)
-          if (widget.book.startedAt != null) ...[
+          if (book.startedAt != null) ...[
             Text(
               l10n.personalBookStartedAt,
               style: theme.textTheme.titleSmall,
             ),
             const SizedBox(height: 4),
             Text(
-              _formatDate(widget.book.startedAt!, l10n),
+              _formatDate(book.startedAt!, l10n),
               style: theme.textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
           ],
 
           // Finished at (if available)
-          if (widget.book.finishedAt != null) ...[
+          if (book.finishedAt != null) ...[
             Text(
               l10n.personalBookFinishedAt,
               style: theme.textTheme.titleSmall,
             ),
             const SizedBox(height: 4),
             Text(
-              _formatDate(widget.book.finishedAt!, l10n),
+              _formatDate(book.finishedAt!, l10n),
               style: theme.textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
@@ -334,25 +368,27 @@ class _BookDetailContentState extends State<_BookDetailContent> {
 
           // Rating widget (only visible when status is 'read')
           PersonalRatingWidget(
-            status: widget.book.status,
-            currentRating: widget.book.rating,
-            onRatingChanged: widget.onRatingChanged,
+            status: book.status,
+            currentRating: book.rating,
+            onRatingChanged: onRatingChanged,
           ),
           const SizedBox(height: 24),
 
-          // Comments field (moved above review)
+          // Comments field
           PersonalNoteField(
-            initialValue: _notesController.text,
-            onSaved: (_) => _saveNotes(),
-            onSave: _saveNotes,
+            userId: userId,
+            notes: book.notes,
+            onAddNote: onNoteAdded,
+            onDeleteNote: onNoteDeleted,
+            onUpdateNote: onNoteUpdated,
             enabled: true,
           ),
           const SizedBox(height: 24),
 
           // Review form (only visible when status is 'read')
           PersonalReviewForm(
-            book: widget.book,
-            onSubmit: widget.onReviewSubmitted,
+            book: book,
+            onSubmit: onReviewSubmitted,
           ),
         ],
       ),

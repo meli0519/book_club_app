@@ -56,10 +56,19 @@ dependencies:
   # Image picker
   image_picker: ^1.1.2
 
+  # Image processing and caching
+  image: ^4.1.7
+  cached_network_image: ^3.3.1
+
+  # Path utilities
+  path: ^1.9.0
+
   # Shared preferences for theme persistence
   shared_preferences: ^2.2.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.3
   flutter_test:
     sdk: flutter
 
@@ -118,3 +127,25 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/logo_alquimia.png
+  color_dark: "#1A1A2E"
+  image_dark: assets/images/logo_alquimia.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/images/logo_alquimia.png
+    color_dark: "#1A1A2E"
+    image_dark: assets/images/logo_alquimia.png
+  web: false
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo_alquimia.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  # Opcional: puedes personalizar más
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/logo_alquimia.png"

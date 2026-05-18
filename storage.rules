@@ -9,5 +9,19 @@ service firebase.storage {
       allow read, write: if request.auth != null
                          && request.auth.uid == userId;
     }
+
+    // -----------------------------------------------------------------------
+    // user_stickers/{userId}/{allPaths=**}
+    // Requirements 8.1, 8.2, 8.3, 8.4: only the owner can read/write,
+    // write validates file size ≤ 2MB and content type is image/png|jpeg|webp
+    // -----------------------------------------------------------------------
+    match /user_stickers/{userId}/{allPaths=**} {
+      allow read: if request.auth != null
+                  && request.auth.uid == userId;
+      allow write: if request.auth != null
+                   && request.auth.uid == userId
+                   && request.resource.size <= 2 * 1024 * 1024
+                   && request.resource.contentType.matches('image/(png|jpeg|webp)');
+    }
   }
 }

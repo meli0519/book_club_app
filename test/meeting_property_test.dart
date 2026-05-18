@@ -17,16 +17,6 @@ String? validateRequired(String? value) {
   return null;
 }
 
-/// Returns null if [value] is a valid partialRating (int 1–5), error otherwise.
-String? validatePartialRating(String? value) {
-  if (value == null || value.trim().isEmpty) return 'This field is required';
-  final parsed = int.tryParse(value.trim());
-  if (parsed == null || parsed < 1 || parsed > 5) {
-    return 'Rating must be a number between 1 and 5';
-  }
-  return null;
-}
-
 // ---------------------------------------------------------------------------
 // Firestore helpers
 // ---------------------------------------------------------------------------
@@ -36,7 +26,6 @@ Future<String> _createMeeting(
   required String bookId,
   required DateTime date,
   required String notes,
-  required int partialRating,
   required String createdBy,
   required DateTime createdAt,
 }) async {
@@ -45,7 +34,6 @@ Future<String> _createMeeting(
     'bookId': bookId,
     'date': Timestamp.fromDate(date),
     'notes': notes,
-    'partialRating': partialRating,
     'createdBy': createdBy,
     'createdAt': Timestamp.fromDate(createdAt),
   });
@@ -77,24 +65,6 @@ List<String> _generateBookIds() =>
 List<String> _generateUserIds() =>
     List.generate(20, (i) => 'user_$i') + ['leader_1', 'leader_2'];
 
-List<String> _generateInvalidRatings() => [
-      '',
-      ' ',
-      '0',
-      '6',
-      '-1',
-      '10',
-      'abc',
-      '1.5',
-      '5.1',
-      '100',
-      '\t',
-      '\n',
-    ];
-
-List<String> _generateValidRatings() =>
-    ['1', '2', '3', '4', '5'];
-
 /// Generates N distinct DateTime values spread across a date range.
 List<DateTime> _generateDates(int count, DateTime base) =>
     List.generate(count, (i) => base.add(Duration(hours: i * 11 + 3)));
@@ -118,8 +88,6 @@ List<DateTime> _shuffleDates(List<DateTime> dates) {
 void main() {
   final bookIds = _generateBookIds();
   final userIds = _generateUserIds();
-  final invalidRatings = _generateInvalidRatings();
-  final validRatings = _generateValidRatings();
 
   // -------------------------------------------------------------------------
   // P9: Validación de campos obligatorios de Meeting
@@ -134,17 +102,13 @@ void main() {
 
           // Simulate: date is null → form is invalid → no write
           const DateTime? selectedDate = null;
-          final ratingError = validatePartialRating('3');
 
-          if (selectedDate == null || ratingError != null) {
-            // Validation failed — do NOT write to Firestore
-          } else {
+          if (selectedDate != null) {
             await _createMeeting(
               fakeFirestore,
               bookId: bookId,
               date: selectedDate,
               notes: 'notes',
-              partialRating: 3,
               createdBy: userIds[i % userIds.length],
               createdAt: DateTime.now(),
             );
@@ -154,96 +118,8 @@ void main() {
           expect(
             snapshot.docs.length,
             equals(0),
-            reason: 'No meeting should be created when date is null (bookId=$bookId)',
-          );
-        }
-      });
-    });
-
-    group('partialRating validation', () {
-      test('validatePartialRating rejects all invalid rating inputs', () {
-        for (final invalid in invalidRatings) {
-          final result = validatePartialRating(invalid);
-          expect(
-            result,
-            isNotNull,
-            reason: 'validatePartialRating should return error for "$invalid"',
-          );
-        }
-      });
-
-      test('validatePartialRating accepts all valid rating inputs (1–5)', () {
-        for (final valid in validRatings) {
-          final result = validatePartialRating(valid);
-          expect(
-            result,
-            isNull,
-            reason: 'validatePartialRating should return null for "$valid"',
-          );
-        }
-      });
-
-      test('no document created when partialRating is invalid', () async {
-        for (int i = 0; i < invalidRatings.length; i++) {
-          final fakeFirestore = FakeFirebaseFirestore();
-          final invalidRating = invalidRatings[i];
-
-          final ratingError = validatePartialRating(invalidRating);
-          final hasDate = true; // date is provided
-
-          if (!hasDate || ratingError != null) {
-            // Validation failed — do NOT write to Firestore
-          } else {
-            await _createMeeting(
-              fakeFirestore,
-              bookId: 'book_1',
-              date: DateTime(2024, 1, 1),
-              notes: 'notes',
-              partialRating: int.tryParse(invalidRating.trim()) ?? 0,
-              createdBy: 'user_1',
-              createdAt: DateTime.now(),
-            );
-          }
-
-          final snapshot = await fakeFirestore.collection('meetings').get();
-          expect(
-            snapshot.docs.length,
-            equals(0),
-            reason: 'No meeting should be created for invalid rating="$invalidRating"',
-          );
-        }
-      });
-
-      test('document is created when both date and partialRating are valid',
-          () async {
-        for (int i = 0; i < validRatings.length; i++) {
-          final fakeFirestore = FakeFirebaseFirestore();
-          final validRating = validRatings[i];
-          final bookId = bookIds[i % bookIds.length];
-
-          final ratingError = validatePartialRating(validRating);
-          final selectedDate = DateTime(2024, 1, i + 1);
-
-          if (selectedDate == null || ratingError != null) {
-            // Should not happen for valid inputs
-            fail('Valid inputs should not fail validation');
-          } else {
-            await _createMeeting(
-              fakeFirestore,
-              bookId: bookId,
-              date: selectedDate,
-              notes: 'Meeting notes $i',
-              partialRating: int.parse(validRating),
-              createdBy: userIds[i % userIds.length],
-              createdAt: DateTime.now(),
-            );
-          }
-
-          final snapshot = await fakeFirestore.collection('meetings').get();
-          expect(
-            snapshot.docs.length,
-            equals(1),
-            reason: 'Meeting should be created for valid rating="$validRating"',
+            reason:
+                'No meeting should be created when date is null (bookId=$bookId)',
           );
         }
       });
@@ -257,7 +133,6 @@ void main() {
           final userId = userIds[i % userIds.length];
           final date = DateTime(2024, 1, i + 1);
           final notes = 'Meeting notes $i';
-          final partialRating = (i % 5) + 1;
           final createdAt = DateTime(2024, 1, 1);
 
           final meetingId = await _createMeeting(
@@ -265,7 +140,6 @@ void main() {
             bookId: bookId,
             date: date,
             notes: notes,
-            partialRating: partialRating,
             createdBy: userId,
             createdAt: createdAt,
           );
@@ -275,11 +149,11 @@ void main() {
           expect(doc.exists, isTrue);
 
           final data = doc.data()!;
-          expect(data.containsKey('bookId'), isTrue, reason: 'bookId must exist');
+          expect(data.containsKey('bookId'), isTrue,
+              reason: 'bookId must exist');
           expect(data.containsKey('date'), isTrue, reason: 'date must exist');
-          expect(data.containsKey('notes'), isTrue, reason: 'notes must exist');
-          expect(data.containsKey('partialRating'), isTrue,
-              reason: 'partialRating must exist');
+          expect(data.containsKey('notes'), isTrue,
+              reason: 'notes must exist');
           expect(data.containsKey('createdBy'), isTrue,
               reason: 'createdBy must exist');
           expect(data.containsKey('createdAt'), isTrue,
@@ -287,7 +161,6 @@ void main() {
 
           expect(data['bookId'], equals(bookId));
           expect(data['notes'], equals(notes));
-          expect(data['partialRating'], equals(partialRating));
           expect(data['createdBy'], equals(userId));
           expect(data['date'], isA<Timestamp>());
           expect(data['createdAt'], isA<Timestamp>());
@@ -300,14 +173,12 @@ void main() {
           final bookId = bookIds[i];
           final userId = userIds[i % userIds.length];
           final date = DateTime(2024, 3, i + 1);
-          final partialRating = (i % 5) + 1;
 
           final meetingId = await _createMeeting(
             fakeFirestore,
             bookId: bookId,
             date: date,
             notes: 'Notes $i',
-            partialRating: partialRating,
             createdBy: userId,
             createdAt: DateTime(2024, 3, 1),
           );
@@ -318,7 +189,6 @@ void main() {
 
           expect(meeting.id, equals(meetingId));
           expect(meeting.bookId, equals(bookId));
-          expect(meeting.partialRating, equals(partialRating));
           expect(meeting.createdBy, equals(userId));
           expect(
             meeting.date.difference(date).inSeconds.abs(),
@@ -335,7 +205,8 @@ void main() {
   // Validates: Requirements 6.5
   // -------------------------------------------------------------------------
   group('P10: Meeting list is always ordered by date ascending', () {
-    test('for any collection of meetings, list is sorted by date asc (2 meetings)',
+    test(
+        'for any collection of meetings, list is sorted by date asc (2 meetings)',
         () async {
       final base = DateTime(2024, 1, 1);
       final dates = _generateDates(2, base);
@@ -351,7 +222,6 @@ void main() {
             bookId: bookId,
             date: shuffled[i],
             notes: 'Meeting $i (trial $trial)',
-            partialRating: (i % 5) + 1,
             createdBy: 'user_1',
             createdAt: DateTime.now(),
           );
@@ -364,12 +234,14 @@ void main() {
           meetings[0].date.isBefore(meetings[1].date) ||
               meetings[0].date.isAtSameMomentAs(meetings[1].date),
           isTrue,
-          reason: 'meetings[0].date must be <= meetings[1].date (trial=$trial)',
+          reason:
+              'meetings[0].date must be <= meetings[1].date (trial=$trial)',
         );
       }
     });
 
-    test('for any collection of meetings, list is sorted by date asc (5 meetings)',
+    test(
+        'for any collection of meetings, list is sorted by date asc (5 meetings)',
         () async {
       final base = DateTime(2024, 3, 1);
       final dates = _generateDates(5, base);
@@ -385,7 +257,6 @@ void main() {
             bookId: bookId,
             date: shuffled[i],
             notes: 'Meeting $i',
-            partialRating: (i % 5) + 1,
             createdBy: 'user_1',
             createdAt: DateTime.now(),
           );
@@ -406,7 +277,8 @@ void main() {
       }
     });
 
-    test('for any collection of meetings, list is sorted by date asc (10 meetings)',
+    test(
+        'for any collection of meetings, list is sorted by date asc (10 meetings)',
         () async {
       final base = DateTime(2024, 6, 1);
       final dates = _generateDates(10, base);
@@ -422,7 +294,6 @@ void main() {
             bookId: bookId,
             date: shuffled[i],
             notes: 'Meeting $i',
-            partialRating: (i % 5) + 1,
             createdBy: 'user_1',
             createdAt: DateTime.now(),
           );
@@ -443,7 +314,8 @@ void main() {
       }
     });
 
-    test('for any collection of meetings, list is sorted by date asc (50 meetings)',
+    test(
+        'for any collection of meetings, list is sorted by date asc (50 meetings)',
         () async {
       final base = DateTime(2023, 1, 1);
       final dates = _generateDates(50, base);
@@ -459,7 +331,6 @@ void main() {
             bookId: bookId,
             date: shuffled[i],
             notes: 'Meeting $i',
-            partialRating: (i % 5) + 1,
             createdBy: 'user_1',
             createdAt: DateTime.now(),
           );
@@ -495,7 +366,6 @@ void main() {
         bookId: bookId,
         date: DateTime(2024, 5, 15),
         notes: 'Only meeting',
-        partialRating: 4,
         createdBy: 'user_1',
         createdAt: DateTime.now(),
       );
@@ -515,7 +385,6 @@ void main() {
         bookId: bookA,
         date: DateTime(2024, 6, 1),
         notes: 'A meeting 1',
-        partialRating: 3,
         createdBy: 'user_1',
         createdAt: DateTime.now(),
       );
@@ -524,7 +393,6 @@ void main() {
         bookId: bookA,
         date: DateTime(2024, 8, 1),
         notes: 'A meeting 2',
-        partialRating: 4,
         createdBy: 'user_1',
         createdAt: DateTime.now(),
       );
@@ -535,7 +403,6 @@ void main() {
         bookId: bookB,
         date: DateTime(2024, 1, 1),
         notes: 'B meeting 1',
-        partialRating: 5,
         createdBy: 'user_2',
         createdAt: DateTime.now(),
       );
@@ -578,7 +445,6 @@ void main() {
           bookId: bookId,
           date: testDates[i],
           notes: 'Meeting ${testDates[i].year}-${testDates[i].month}',
-          partialRating: (i % 5) + 1,
           createdBy: 'user_1',
           createdAt: DateTime.now(),
         );
@@ -592,8 +458,7 @@ void main() {
           meetings[i].date.isBefore(meetings[i + 1].date) ||
               meetings[i].date.isAtSameMomentAs(meetings[i + 1].date),
           isTrue,
-          reason:
-              'meetings[$i].date (${meetings[i].date}) must be <= '
+          reason: 'meetings[$i].date (${meetings[i].date}) must be <= '
               'meetings[${i + 1}].date (${meetings[i + 1].date})',
         );
       }

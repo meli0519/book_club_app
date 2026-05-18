@@ -100,7 +100,6 @@ final _sampleMeeting = {
   'bookId': 'book-001',
   'date': Timestamp.fromDate(DateTime(2024, 6, 15)),
   'notes': 'Test meeting notes',
-  'partialRating': 4,
   'createdBy': _leaderUid,
   'createdAt': Timestamp.fromDate(DateTime(2024, 6, 1)),
 };

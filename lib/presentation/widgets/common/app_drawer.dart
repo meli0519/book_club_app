@@ -88,6 +88,17 @@ class AppDrawer extends ConsumerWidget {
                       context.go(AppRoutes.personalBooks);
                     },
                   ),
+                  ListTile(
+                    leading: const Icon(Icons.emoji_emotions, color: Colors.white),
+                    title: Text(
+                      l10n.stickerGalleryTitle,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      context.go(AppRoutes.stickerManage);
+                    },
+                  ),
                   if (isLeader)
                     ListTile(
                       leading: const Icon(Icons.people, color: Colors.white),

@@ -71,11 +71,18 @@ class RatingListItem extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: List.generate(5, (i) {
-                    final filled = (i + 1) <= rating.value;
+                    final starValue = i + 1;
+                    final filled = starValue <= rating.value.floor();
+                    final isHalf = starValue == rating.value.ceil() &&
+                        rating.value % 1 != 0;
                     return Icon(
-                      filled ? Icons.star : Icons.star_border,
+                      filled
+                          ? Icons.star
+                          : isHalf
+                              ? Icons.star_half
+                              : Icons.star_border,
                       size: 18,
-                      color: filled ? filledColor : emptyColor,
+                      color: (filled || isHalf) ? filledColor : emptyColor,
                     );
                   }),
                 ),

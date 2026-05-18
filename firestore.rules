@@ -116,5 +116,19 @@ service cloud.firestore {
       allow read, write: if request.auth != null
                          && request.auth.uid == userId;
     }
+
+    // -----------------------------------------------------------------------
+    // user_stickers/{userId}/stickers subcollection
+    // Requirement 9.1: users can only read their own stickers
+    // Requirement 9.2: users can only write to their own stickers
+    // Requirement 9.3: userId field in document must match authenticated UID
+    // -----------------------------------------------------------------------
+    match /user_stickers/{userId}/stickers/{stickerId} {
+      allow read: if request.auth != null
+                  && request.auth.uid == userId;
+      allow write: if request.auth != null
+                   && request.auth.uid == userId
+                   && request.resource.data.userId == request.auth.uid;
+    }
   }
 }

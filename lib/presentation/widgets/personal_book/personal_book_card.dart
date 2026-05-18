@@ -67,7 +67,7 @@ class PersonalBookCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     // Show rating if book is read and has rating, otherwise show status chip
                     if (isRead && hasRating)
-                      StarRatingWidget(averageRating: book.rating!.toDouble())
+                      StarRatingWidget(averageRating: book.rating)
                     else
                       PersonalBookStatusChip(status: book.status),
                   ],
